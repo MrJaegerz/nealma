@@ -1,12 +1,13 @@
-import { Quote } from "lucide-react";
+import { Quote, Star } from "lucide-react";
 
 interface TestimonialProps {
   quote: string;
   author: string;
   service: string;
+  rating?: number;
 }
 
-export function Testimonial({ quote, author, service }: TestimonialProps) {
+export function Testimonial({ quote, author, service, rating = 5 }: TestimonialProps) {
   return (
     <figure className="rounded-2xl bg-nealma-bg-warm p-6 shadow-sm sm:p-8">
       <Quote className="size-8 text-nealma-200" aria-hidden="true" />
@@ -20,6 +21,11 @@ export function Testimonial({ quote, author, service }: TestimonialProps) {
         <div>
           <p className="text-sm font-medium text-nealma-text">{author}</p>
           <p className="text-xs text-nealma-text-light">{service}</p>
+        </div>
+        <div className="ml-auto flex gap-0.5" aria-label={`${rating} étoiles sur 5`}>
+          {Array.from({ length: rating }).map((_, i) => (
+            <Star key={i} className="size-3.5 fill-nealma-300 text-nealma-300" />
+          ))}
         </div>
       </figcaption>
     </figure>

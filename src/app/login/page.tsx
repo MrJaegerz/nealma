@@ -79,6 +79,18 @@ export default function LoginPage() {
               />
             </div>
 
+            <div className="text-right">
+              <button
+                type="button"
+                className="text-xs text-nealma-text-light transition-colors hover:text-nealma-400"
+                onClick={() => {
+                  // Placeholder for forgot password flow
+                }}
+              >
+                Mot de passe oublié ?
+              </button>
+            </div>
+
             {error && (
               <p className="text-sm text-destructive">{error}</p>
             )}

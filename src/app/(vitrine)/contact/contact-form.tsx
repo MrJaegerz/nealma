@@ -5,6 +5,13 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 interface FormErrors {
   name?: string;
@@ -16,6 +23,7 @@ export function ContactForm() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
+  const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
   const [errors, setErrors] = useState<FormErrors>({});
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
@@ -60,6 +68,7 @@ export function ContactForm() {
           name: name.trim(),
           email: email.trim(),
           phone: phone.trim() || undefined,
+          subject: subject || undefined,
           message: message.trim(),
         }),
       });
@@ -75,6 +84,7 @@ export function ContactForm() {
       setName("");
       setEmail("");
       setPhone("");
+      setSubject("");
       setMessage("");
       setErrors({});
     } catch (err) {
@@ -170,6 +180,21 @@ export function ContactForm() {
           value={phone}
           onChange={(e) => setPhone(e.target.value)}
         />
+      </div>
+
+      <div className="space-y-2">
+        <Label htmlFor="subject">Sujet de votre demande</Label>
+        <Select value={subject} onValueChange={setSubject}>
+          <SelectTrigger id="subject">
+            <SelectValue placeholder="Choisir un sujet..." />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="renseignement">Demande de renseignement</SelectItem>
+            <SelectItem value="reservation">Réservation</SelectItem>
+            <SelectItem value="question-soin">Question sur un soin</SelectItem>
+            <SelectItem value="autre">Autre</SelectItem>
+          </SelectContent>
+        </Select>
       </div>
 
       <div className="space-y-2">

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { MapPin } from "lucide-react";
 import { AnimatedBlobs } from "@/components/ui/animated-blobs";
 import { ContactForm } from "./contact-form";
 
@@ -82,6 +83,14 @@ export default function ContactPage() {
                     <br />
                     9h00 - 19h00
                   </p>
+                </div>
+
+                {/* Zone map placeholder */}
+                <div className="mt-4 flex h-40 items-center justify-center rounded-lg border border-nealma-border bg-gradient-to-br from-nealma-50 to-nealma-100">
+                  <div className="flex flex-col items-center gap-2 text-nealma-text-light">
+                    <MapPin className="size-6 text-nealma-300" />
+                    <span className="text-sm">Zone : Île-de-France</span>
+                  </div>
                 </div>
               </div>
             </div>

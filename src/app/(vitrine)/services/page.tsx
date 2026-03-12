@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Home, MapPin, Heart } from "lucide-react";
 import { ServiceCard } from "@/components/vitrine/service-card";
 import { Button } from "@/components/ui/button";
 import { AnimatedBlobs } from "@/components/ui/animated-blobs";
@@ -173,8 +174,8 @@ export default function ServicesPage() {
           </div>
           <div className="mt-12 grid gap-8 sm:grid-cols-3">
             <div className="rounded-xl border border-nealma-border bg-white p-6 text-center">
-              <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-nealma-100">
-                <span className="text-xl">🏠</span>
+              <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-nealma-100" aria-hidden="true">
+                <Home className="size-6 text-nealma-400" />
               </div>
               <h3 className="text-lg font-semibold text-nealma-text">
                 À domicile
@@ -185,8 +186,8 @@ export default function ServicesPage() {
               </p>
             </div>
             <div className="rounded-xl border border-nealma-border bg-white p-6 text-center">
-              <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-nealma-green-100">
-                <span className="text-xl">🌿</span>
+              <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-nealma-green-100" aria-hidden="true">
+                <MapPin className="size-6 text-nealma-green-400" />
               </div>
               <h3 className="text-lg font-semibold text-nealma-text">
                 Île-de-France
@@ -197,8 +198,8 @@ export default function ServicesPage() {
               </p>
             </div>
             <div className="rounded-xl border border-nealma-border bg-white p-6 text-center">
-              <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-nealma-100">
-                <span className="text-xl">💛</span>
+              <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-nealma-100" aria-hidden="true">
+                <Heart className="size-6 text-nealma-400" />
               </div>
               <h3 className="text-lg font-semibold text-nealma-text">
                 Bienveillance

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Hero } from "@/components/vitrine/hero";
+import { TrustStrip } from "@/components/vitrine/trust-strip";
 import { ServiceCard } from "@/components/vitrine/service-card";
 import { Testimonial } from "@/components/vitrine/testimonial";
 import { Button } from "@/components/ui/button";
@@ -123,6 +124,8 @@ export default function HomePage() {
       />
 
       <Hero />
+
+      <TrustStrip />
 
       {/* Services */}
       <section
