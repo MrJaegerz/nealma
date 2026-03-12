@@ -149,7 +149,7 @@ export default function ServicesPage() {
                   </ul>
                 </div>
                 <Button asChild className="mt-4">
-                  <Link href="/reservation">Réserver ce soin</Link>
+                  <Link href={`/reservation/${service.slug}`}>Réserver ce soin</Link>
                 </Button>
               </div>
             </div>

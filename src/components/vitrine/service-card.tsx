@@ -10,6 +10,7 @@ import {
   CardContent,
   CardFooter,
 } from "@/components/ui/card";
+import { modalityLabel } from "@/lib/utils";
 
 interface ServiceCardProps {
   name: string;
@@ -32,19 +33,6 @@ function formatDuration(minutes: number): string {
   const h = Math.floor(minutes / 60);
   const m = minutes % 60;
   return m > 0 ? `${h}h${String(m).padStart(2, "0")}` : `${h}h`;
-}
-
-function modalityLabel(modality: string): string {
-  switch (modality) {
-    case "domicile":
-      return "\u00C0 domicile";
-    case "visio":
-      return "Visio";
-    case "cabinet":
-      return "Cabinet";
-    default:
-      return modality;
-  }
 }
 
 export function ServiceCard({

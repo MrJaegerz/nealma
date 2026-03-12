@@ -13,7 +13,7 @@ export default function ConfirmationPage() {
       <div className="max-w-lg mx-auto text-center">
         <CheckCircle className="h-16 w-16 text-nealma-green-300 mx-auto mb-6" />
 
-        <h1 className="text-3xl font-heading font-bold text-nealma-text">
+        <h1 className="text-3xl font-heading text-nealma-text">
           Rendez-vous confirmé !
         </h1>
 

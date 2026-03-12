@@ -149,7 +149,7 @@ export default function HomePage() {
       </section>
 
       {/* Testimonials */}
-      <section className="bg-nealma-bg py-20 px-4 sm:px-6 lg:px-8">
+      <section aria-label="Témoignages" className="bg-nealma-bg py-20 px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-5xl">
           <div className="mb-12 text-center">
             <h2 className="text-3xl font-heading text-nealma-text sm:text-4xl">

@@ -55,7 +55,7 @@ export default async function ServiceBookingPage({ params }: Props) {
 
       <div className="max-w-4xl mx-auto">
         <div className="mb-8">
-          <h1 className="text-3xl font-heading font-bold text-nealma-text">
+          <h1 className="text-3xl font-heading text-nealma-text">
             {service.name}
           </h1>
           <p className="mt-2 text-nealma-text-light">

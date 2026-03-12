@@ -106,7 +106,7 @@ export default async function BlogPostPage({ params }: Props) {
       )}
 
       <header className="mb-8">
-        <h1 className="text-3xl md:text-4xl font-heading font-bold text-nealma-text">
+        <h1 className="text-3xl md:text-4xl font-heading text-nealma-text">
           {post.title}
         </h1>
         {publishedDate && (

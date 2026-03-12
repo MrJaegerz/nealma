@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { AnimatedBlobs } from "@/components/ui/animated-blobs";
 import { ContactForm } from "./contact-form";
 
 export const metadata: Metadata = {
@@ -11,8 +12,9 @@ export default function ContactPage() {
   return (
     <>
       {/* Hero */}
-      <section className="bg-nealma-bg-warm py-20 px-4 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-4xl text-center">
+      <section className="relative isolate overflow-hidden bg-nealma-bg-warm py-20 px-4 sm:px-6 lg:px-8">
+        <AnimatedBlobs />
+        <div className="relative mx-auto max-w-4xl text-center">
           <h1 className="text-4xl font-heading text-nealma-text sm:text-5xl">
             Contact
           </h1>

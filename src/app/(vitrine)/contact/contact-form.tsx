@@ -124,6 +124,7 @@ export function ContactForm() {
           id="name"
           type="text"
           placeholder="Votre nom"
+          autoComplete="name"
           value={name}
           onChange={(e) => setName(e.target.value)}
           aria-invalid={!!errors.name}
@@ -144,6 +145,7 @@ export function ContactForm() {
           id="email"
           type="email"
           placeholder="votre@email.fr"
+          autoComplete="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           aria-invalid={!!errors.email}
@@ -164,6 +166,7 @@ export function ContactForm() {
           id="phone"
           type="tel"
           placeholder="06 00 00 00 00"
+          autoComplete="tel"
           value={phone}
           onChange={(e) => setPhone(e.target.value)}
         />

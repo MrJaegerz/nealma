@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import { Heart, Clock, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { AnimatedBlobs } from "@/components/ui/animated-blobs";
 import Link from "next/link";
@@ -72,7 +73,7 @@ export default function AProposPage() {
       </section>
 
       {/* Parcours & Certifications */}
-      <section className="relative isolate overflow-hidden bg-nealma-bg-warm py-20 px-4 sm:px-6 lg:px-8">
+      <section aria-label="Parcours et formations" className="relative isolate overflow-hidden bg-nealma-bg-warm py-20 px-4 sm:px-6 lg:px-8">
         <AnimatedBlobs />
         <div className="relative mx-auto max-w-5xl">
           <h2 className="mb-12 text-center text-3xl font-heading text-nealma-text sm:text-4xl">
@@ -133,8 +134,8 @@ export default function AProposPage() {
           </h2>
           <div className="grid gap-8 sm:grid-cols-3">
             <div className="text-center">
-              <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-nealma-bg-warm">
-                <span className="text-2xl text-nealma-400">&#10084;</span>
+              <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-nealma-bg-warm" aria-hidden="true">
+                <Heart className="size-7 text-nealma-400" />
               </div>
               <h3 className="mb-2 text-lg font-semibold text-nealma-text">
                 Bienveillance
@@ -146,8 +147,8 @@ export default function AProposPage() {
               </p>
             </div>
             <div className="text-center">
-              <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-nealma-green-100">
-                <span className="text-2xl text-nealma-green-400">&#9202;</span>
+              <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-nealma-green-100" aria-hidden="true">
+                <Clock className="size-7 text-nealma-green-400" />
               </div>
               <h3 className="mb-2 text-lg font-semibold text-nealma-text">
                 Respect du rythme
@@ -158,8 +159,8 @@ export default function AProposPage() {
               </p>
             </div>
             <div className="text-center">
-              <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-nealma-bg-warm">
-                <span className="text-2xl text-nealma-400">&#9733;</span>
+              <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-nealma-bg-warm" aria-hidden="true">
+                <Star className="size-7 text-nealma-400" />
               </div>
               <h3 className="mb-2 text-lg font-semibold text-nealma-text">
                 Expertise

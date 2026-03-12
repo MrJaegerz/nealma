@@ -11,6 +11,7 @@ import {
   ExternalLink,
   LogOut,
   Menu,
+  Megaphone,
 } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 import { cn } from "@/lib/utils";
@@ -49,7 +50,7 @@ const navLinks = [
   {
     label: "TikTok Ads",
     href: "/dashboard/ads/tiktok",
-    icon: BarChart3,
+    icon: Megaphone,
   },
   {
     label: "Paramètres",

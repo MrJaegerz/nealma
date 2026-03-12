@@ -1,0 +1,1342 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Néalma — Wireframe Redesign (Toutes les pages vitrine)</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Comic Sans MS', 'Chalkboard SE', cursive;
+      background: #f0f0f0;
+      color: #222;
+      font-size: 13px;
+    }
+
+    /* ── LEGEND ────────────────────────────────────────────── */
+    .legend {
+      background: #fff;
+      border: 2px solid #333;
+      padding: 16px 20px;
+      margin: 16px;
+      border-radius: 4px;
+    }
+    .legend h1 { font-size: 16px; margin-bottom: 8px; }
+    .legend p { font-size: 12px; color: #555; margin-bottom: 10px; }
+    .badge-row { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+    .badge { padding: 3px 8px; border-radius: 3px; font-size: 11px; font-weight: bold; color: #fff; }
+    .reuse { background: #4CAF50; }
+    .new { background: #FF9800; }
+
+    /* ── PAGE WRAPPERS ─────────────────────────────────────── */
+    .page-section {
+      background: #fff;
+      border: 2px solid #333;
+      border-radius: 4px;
+      margin: 16px;
+      overflow: hidden;
+    }
+    .page-label {
+      background: #333;
+      color: #fff;
+      padding: 8px 16px;
+      font-size: 14px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .page-label span { font-size: 11px; font-weight: normal; opacity: 0.7; }
+    .page-content { padding: 0; }
+    .improvement-note {
+      background: #fffbe6;
+      border-left: 3px solid #f59e0b;
+      padding: 6px 12px;
+      font-size: 11px;
+      color: #555;
+    }
+
+    /* ── WIREFRAME ELEMENTS ────────────────────────────────── */
+    .wf-header {
+      background: #fff;
+      border-bottom: 2px solid #999;
+      padding: 10px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .wf-logo { font-size: 18px; font-weight: bold; border-bottom: 2px solid #999; padding-bottom: 2px; }
+    .wf-nav { display: flex; gap: 8px; }
+    .wf-nav a {
+      padding: 4px 10px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      font-size: 11px;
+      text-decoration: none;
+      color: #333;
+    }
+    .wf-nav a.active { background: #eee; border-color: #999; font-weight: bold; }
+    .wf-cta-btn {
+      padding: 6px 14px;
+      background: #ddd;
+      border: 2px solid #666;
+      border-radius: 3px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+    .wf-footer {
+      background: #f5f5f5;
+      border-top: 2px solid #999;
+      padding: 20px 24px;
+    }
+    .wf-footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 16px;
+    }
+    .wf-footer-col h4 { font-size: 11px; margin-bottom: 8px; text-decoration: underline; }
+    .wf-footer-col p, .wf-footer-col a {
+      font-size: 10px;
+      color: #666;
+      display: block;
+      margin-bottom: 4px;
+      text-decoration: none;
+    }
+    .wf-footer-bottom {
+      border-top: 1px solid #ccc;
+      padding-top: 10px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 10px;
+      color: #888;
+    }
+    .wf-social-row { display: flex; gap: 6px; margin-top: 6px; }
+    .wf-social-btn {
+      width: 28px; height: 28px;
+      border: 1px solid #999;
+      border-radius: 3px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+    }
+
+    /* hero */
+    .wf-hero {
+      background: repeating-linear-gradient(45deg, #f5f5f5 0px, #f5f5f5 10px, #ececec 10px, #ececec 20px);
+      padding: 60px 24px;
+      text-align: center;
+      position: relative;
+      border-bottom: 1px solid #ccc;
+    }
+    .wf-hero-eyebrow {
+      display: inline-block;
+      border: 1px solid #999;
+      border-radius: 20px;
+      padding: 2px 12px;
+      font-size: 10px;
+      margin-bottom: 16px;
+      color: #666;
+    }
+    .wf-hero h1 { font-size: 28px; line-height: 1.3; max-width: 600px; margin: 0 auto 14px; }
+    .wf-hero p { font-size: 13px; max-width: 480px; margin: 0 auto 24px; color: #555; line-height: 1.6; }
+    .wf-hero-btns { display: flex; gap: 12px; justify-content: center; }
+    .wf-btn-primary { padding: 10px 22px; background: #bbb; border: 2px solid #555; border-radius: 3px; font-size: 12px; font-weight: bold; }
+    .wf-btn-secondary { padding: 10px 22px; background: #fff; border: 2px solid #555; border-radius: 3px; font-size: 12px; }
+    .wf-blob { position: absolute; border-radius: 50%; opacity: 0.12; background: #888; }
+
+    /* trust strip */
+    .wf-trust-strip {
+      background: #fff;
+      border-top: 1px solid #ccc;
+      border-bottom: 1px solid #ccc;
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+    }
+    .wf-trust-item { display: flex; align-items: center; gap: 6px; font-size: 11px; color: #666; }
+    .wf-trust-icon { width: 18px; height: 18px; border: 1px solid #999; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 9px; }
+
+    /* section */
+    .wf-section { padding: 40px 24px; border-bottom: 1px solid #eee; }
+    .wf-section-header { text-align: center; margin-bottom: 28px; }
+    .wf-section-header h2 { font-size: 20px; margin-bottom: 8px; }
+    .wf-section-header p { font-size: 12px; color: #666; max-width: 480px; margin: 0 auto; }
+
+    /* cards grid */
+    .wf-grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .wf-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .wf-grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .wf-card {
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      overflow: hidden;
+      position: relative;
+      background: #fafafa;
+    }
+    .wf-card-top { height: 3px; background: repeating-linear-gradient(90deg, #bbb 0px, #bbb 30px, #999 30px, #999 60px); }
+    .wf-card-body { padding: 14px; }
+    .wf-card-title { font-size: 13px; font-weight: bold; margin-bottom: 6px; }
+    .wf-card-desc { font-size: 11px; color: #666; line-height: 1.5; margin-bottom: 10px; }
+    .wf-card-meta { display: flex; gap: 10px; align-items: center; margin-bottom: 10px; }
+    .wf-meta-chip { border: 1px solid #ccc; border-radius: 10px; padding: 2px 8px; font-size: 10px; color: #666; display: flex; align-items: center; gap: 3px; }
+    .wf-badge { border: 1px solid #aaa; border-radius: 10px; padding: 2px 8px; font-size: 10px; background: #eee; }
+    .wf-card-btn { display: block; text-align: center; padding: 8px; background: #ddd; border: 1px solid #999; border-radius: 3px; font-size: 11px; font-weight: bold; }
+
+    /* CTA strip */
+    .wf-cta-section {
+      background: repeating-linear-gradient(135deg, #ddd 0px, #ddd 10px, #ccc 10px, #ccc 20px);
+      padding: 48px 24px;
+      text-align: center;
+    }
+    .wf-cta-section h2 { font-size: 22px; margin-bottom: 10px; }
+    .wf-cta-section p { font-size: 12px; color: #555; margin-bottom: 20px; }
+
+    /* testimonials */
+    .wf-testimonial {
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      padding: 16px;
+      background: #f9f9f9;
+      position: relative;
+    }
+    .wf-quote-icon { font-size: 24px; color: #ccc; margin-bottom: 8px; }
+    .wf-testimonial-text { font-size: 12px; line-height: 1.5; color: #555; margin-bottom: 12px; }
+    .wf-testimonial-footer { display: flex; align-items: center; gap: 8px; border-top: 1px solid #e0e0e0; padding-top: 10px; }
+    .wf-avatar { width: 32px; height: 32px; border-radius: 50%; background: #ddd; border: 1px solid #aaa; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold; }
+    .wf-avatar-name { font-size: 11px; font-weight: bold; }
+    .wf-avatar-service { font-size: 10px; color: #888; }
+
+    /* reusable badge */
+    .wf-reuse-badge {
+      position: absolute;
+      top: 4px;
+      right: 4px;
+      background: #4CAF50;
+      color: white;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-size: 9px;
+      font-weight: bold;
+      z-index: 5;
+      font-family: Arial, sans-serif;
+    }
+    .wf-new-badge {
+      position: absolute;
+      top: 4px;
+      right: 4px;
+      background: #FF9800;
+      color: white;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-size: 9px;
+      font-weight: bold;
+      z-index: 5;
+      font-family: Arial, sans-serif;
+    }
+
+    /* about page */
+    .wf-split { display: grid; grid-template-columns: 280px 1fr; gap: 32px; align-items: start; }
+    .wf-image-box {
+      background: #ddd;
+      border: 1px solid #bbb;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      color: #888;
+    }
+    .wf-pill-list { list-style: none; padding: 0; }
+    .wf-pill-list li {
+      display: flex; align-items: start; gap: 8px;
+      font-size: 12px;
+      color: #555;
+      padding: 6px 0;
+      border-bottom: 1px solid #eee;
+    }
+    .wf-dot { width: 6px; height: 6px; border-radius: 50%; background: #999; flex-shrink: 0; margin-top: 5px; }
+    .wf-philosophy-card {
+      text-align: center;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      padding: 20px;
+      background: #fafafa;
+    }
+    .wf-icon-circle {
+      width: 56px; height: 56px;
+      border-radius: 50%;
+      background: #e0e0e0;
+      border: 1px solid #bbb;
+      margin: 0 auto 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+    }
+
+    /* contact page */
+    .wf-contact-grid { display: grid; grid-template-columns: 3fr 2fr; gap: 32px; }
+    .wf-contact-info { border: 1px solid #ccc; border-radius: 4px; padding: 20px; background: #f9f9f9; }
+    .wf-info-item { margin-bottom: 16px; }
+    .wf-info-label { font-size: 10px; font-weight: bold; text-transform: uppercase; letter-spacing: 0.05em; color: #888; margin-bottom: 4px; }
+    .wf-info-value { font-size: 12px; color: #444; }
+    .wf-map-box {
+      height: 160px;
+      background: repeating-linear-gradient(45deg, #e0e0e0 0px, #e0e0e0 5px, #d0d0d0 5px, #d0d0d0 10px);
+      border: 1px solid #bbb;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      color: #999;
+      margin-top: 12px;
+    }
+
+    /* form */
+    .wf-form-field { margin-bottom: 16px; }
+    .wf-form-label { font-size: 11px; font-weight: bold; margin-bottom: 4px; display: block; }
+    .wf-form-input {
+      width: 100%;
+      height: 36px;
+      border: 1px solid #bbb;
+      border-radius: 3px;
+      background: #fff;
+    }
+    .wf-form-textarea {
+      width: 100%;
+      height: 90px;
+      border: 1px solid #bbb;
+      border-radius: 3px;
+      background: #fff;
+    }
+    .wf-form-select {
+      width: 100%;
+      height: 36px;
+      border: 1px solid #bbb;
+      border-radius: 3px;
+      background: #fff;
+      font-family: inherit;
+      font-size: 12px;
+      padding: 0 8px;
+      color: #888;
+    }
+
+    /* reservation / booking */
+    .wf-booking-progress { display: flex; gap: 0; margin-bottom: 24px; }
+    .wf-step {
+      flex: 1;
+      text-align: center;
+      padding: 10px 4px;
+      border: 1px solid #ccc;
+      border-right: none;
+      font-size: 11px;
+      background: #eee;
+      color: #888;
+    }
+    .wf-step:last-child { border-right: 1px solid #ccc; }
+    .wf-step.active { background: #ddd; font-weight: bold; color: #333; border-color: #999; }
+
+    /* blog */
+    .wf-article-card {
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      overflow: hidden;
+      background: #fafafa;
+      position: relative;
+    }
+    .wf-article-cover {
+      height: 140px;
+      background: repeating-linear-gradient(45deg, #ddd 0px, #ddd 5px, #ccc 5px, #ccc 10px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      color: #aaa;
+    }
+    .wf-article-body { padding: 14px; }
+    .wf-article-tag { display: inline-block; border: 1px solid #ccc; border-radius: 10px; padding: 2px 8px; font-size: 9px; margin-bottom: 8px; color: #777; }
+    .wf-article-title { font-size: 13px; font-weight: bold; margin-bottom: 6px; line-height: 1.4; }
+    .wf-article-excerpt { font-size: 11px; color: #666; line-height: 1.5; margin-bottom: 10px; }
+    .wf-article-meta { font-size: 10px; color: #999; }
+
+    /* login */
+    .wf-login-wrap {
+      min-height: 400px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: repeating-linear-gradient(45deg, #f5f5f5 0px, #f5f5f5 10px, #ececec 10px, #ececec 20px);
+      padding: 40px;
+    }
+    .wf-login-card {
+      width: 340px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      padding: 28px;
+      background: #fff;
+      position: relative;
+    }
+    .wf-login-logo { text-align: center; font-size: 22px; font-weight: bold; margin-bottom: 4px; }
+    .wf-login-sub { text-align: center; font-size: 11px; color: #888; margin-bottom: 20px; }
+
+    /* dashboard */
+    .wf-dash-layout { display: flex; min-height: 400px; }
+    .wf-sidebar {
+      width: 200px;
+      border-right: 1px solid #ccc;
+      background: #f9f9f9;
+      flex-shrink: 0;
+    }
+    .wf-sidebar-logo { padding: 16px; font-size: 16px; font-weight: bold; border-bottom: 1px solid #e0e0e0; }
+    .wf-sidebar-nav { padding: 8px; }
+    .wf-nav-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 10px;
+      border-radius: 3px;
+      font-size: 11px;
+      margin-bottom: 2px;
+    }
+    .wf-nav-item.active { background: #e8e8e8; font-weight: bold; }
+    .wf-nav-icon { width: 14px; height: 14px; border: 1px solid #999; border-radius: 2px; }
+    .wf-dash-main { flex: 1; padding: 24px; }
+    .wf-stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 24px; }
+    .wf-stat-card {
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      padding: 14px;
+      background: #fff;
+      position: relative;
+    }
+    .wf-stat-title { font-size: 10px; color: #888; margin-bottom: 4px; }
+    .wf-stat-value { font-size: 20px; font-weight: bold; margin-bottom: 2px; }
+    .wf-stat-delta { font-size: 10px; color: #666; }
+    .wf-stat-icon { position: absolute; top: 12px; right: 12px; width: 24px; height: 24px; border: 1px solid #ccc; border-radius: 3px; display: flex; align-items: center; justify-content: center; font-size: 11px; }
+
+    /* ── ANNOTATION BOX ────────────────────────────────────── */
+    .annotation {
+      background: #fffbe6;
+      border: 1px dashed #ccc;
+      border-radius: 3px;
+      padding: 8px 12px;
+      font-size: 10px;
+      color: #777;
+      margin: 8px 0;
+    }
+    .annotation strong { color: #333; }
+
+    hr { border: none; border-top: 1px dashed #ccc; margin: 0; }
+    .divider { height: 1px; background: #ccc; margin: 24px 0; }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════
+     LEGEND
+══════════════════════════════════════════ -->
+<div class="legend">
+  <h1>🔲 Néalma — Wireframe Redesign · Toutes les pages vitrine</h1>
+  <p>Balsamiq-style · Grayscale · Un seul wireframe de redesign (Option C). Chaque section indique les composants réutilisés et les nouveaux composants suggérés.</p>
+  <div class="badge-row">
+    <span class="badge reuse">[REUSE]</span> Composant existant réutilisé
+    <span class="badge new">[NEW]</span> Nouveau composant à créer
+    <span style="font-size:11px; color:#888;">⚠️ Annotations en jaune = points d'amélioration par rapport au design actuel</span>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SHARED HEADER (redesign)
+══════════════════════════════════════════ -->
+<div class="page-section">
+  <div class="page-label">📌 HEADER PARTAGÉ — amélioration <span>(toutes les pages vitrine)</span></div>
+  <div class="improvement-note">
+    ⚠️ Amélioration : Ajout d'un état actif sur le lien courant (via <code>usePathname()</code>). Le logo Néalma reste à gauche, la navigation au centre est inchangée, le CTA "Réserver" reste à droite.
+  </div>
+  <div class="page-content" style="padding: 0 0 0 0;">
+    <!-- REUSABLE: Header from src/components/vitrine/header.tsx -->
+    <div style="position: relative;">
+      <span class="wf-reuse-badge" title="src/components/vitrine/header.tsx">[REUSE] Header</span>
+      <div class="wf-header">
+        <div class="wf-logo">Néalma</div>
+        <div class="wf-nav">
+          <a href="#">Accueil</a>
+          <a href="#" class="active">Services ← (actif)</a>
+          <a href="#">Blog</a>
+          <a href="#">À propos</a>
+          <a href="#">Contact</a>
+        </div>
+        <div class="wf-cta-btn">Réserver →</div>
+      </div>
+    </div>
+    <div class="annotation"><strong>Fix #4</strong> — Lien courant mis en gras + souligné via <code>usePathname()</code> dans le composant Header.</div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     PAGE 1 — ACCUEIL /
+══════════════════════════════════════════ -->
+<div class="page-section">
+  <div class="page-label">① PAGE ACCUEIL — / <span>(redesign)</span></div>
+
+  <!-- Hero -->
+  <!-- REUSABLE: Hero from src/components/vitrine/hero.tsx -->
+  <div style="position: relative;">
+    <span class="wf-reuse-badge" title="src/components/vitrine/hero.tsx">[REUSE] Hero</span>
+    <div class="wf-hero">
+      <div class="wf-blob" style="width:200px;height:200px;top:-60px;right:80px;"></div>
+      <div class="wf-blob" style="width:140px;height:140px;bottom:-30px;left:60px;"></div>
+      <!-- NEW: Eyebrow badge -->
+      <!-- NEW COMPONENT: EyebrowBadge -->
+      <div style="position: relative; display: inline-block; margin-bottom: 16px;">
+        <span class="wf-new-badge" title="src/components/vitrine/eyebrow-badge.tsx">[NEW] EyebrowBadge</span>
+        <div class="wf-hero-eyebrow">✦ Infirmière diplômée · À domicile en Île-de-France</div>
+      </div>
+      <h1>Accompagnement périnatal bienveillant</h1>
+      <p>Massages prénatal et post-partum, bain enveloppé bébé, soutien à l'allaitement — des soins doux à domicile.</p>
+      <div class="wf-hero-btns">
+        <div class="wf-btn-primary">Découvrir nos services</div>
+        <div class="wf-btn-secondary">Prendre rendez-vous</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Trust strip (NEW) -->
+  <!-- NEW COMPONENT: TrustStrip -->
+  <div style="position: relative;">
+    <span class="wf-new-badge" title="src/components/vitrine/trust-strip.tsx">[NEW] TrustStrip</span>
+    <div class="wf-trust-strip">
+      <div class="wf-trust-item"><div class="wf-trust-icon">✓</div> Infirmière diplômée d'État</div>
+      <div class="wf-trust-item"><div class="wf-trust-icon">★</div> +50 familles accompagnées</div>
+      <div class="wf-trust-item"><div class="wf-trust-icon">🏠</div> Tout l'Île-de-France</div>
+      <div class="wf-trust-item"><div class="wf-trust-icon">⏱</div> Lun–Sam, 9h–19h</div>
+    </div>
+  </div>
+  <div class="annotation"><strong>Nouveau :</strong> Bande de confiance sous le hero pour renforcer la crédibilité (chiffres clés, qualifications, zone).</div>
+
+  <!-- Services -->
+  <div class="wf-section">
+    <div class="wf-section-header">
+      <h2>Nos soins</h2>
+      <p>Des soins personnalisés à domicile pour vous accompagner dans votre parcours périnatal.</p>
+    </div>
+    <div class="wf-grid-4">
+      <!-- REUSABLE: ServiceCard x4 from src/components/vitrine/service-card.tsx -->
+      <!-- Fix #1 : modalityLabel "les_deux" → "Domicile / Visio" -->
+      <div style="position: relative;">
+        <span class="wf-reuse-badge" title="src/components/vitrine/service-card.tsx">[REUSE] ServiceCard</span>
+        <div class="wf-card">
+          <div class="wf-card-top"></div>
+          <div class="wf-card-body">
+            <div style="display:flex;justify-content:space-between;align-items:start;gap:4px;margin-bottom:6px;">
+              <div class="wf-card-title">Massage prénatal</div>
+              <div class="wf-badge">À domicile</div>
+            </div>
+            <div class="wf-card-desc">Un massage doux adapté à la grossesse pour soulager les tensions et favoriser la détente.</div>
+            <div class="wf-card-meta">
+              <div class="wf-meta-chip">⏱ 1h</div>
+              <div class="wf-meta-chip">€ 80,00 €</div>
+            </div>
+            <div class="wf-card-btn">Réserver →</div>
+          </div>
+        </div>
+      </div>
+      <div style="position: relative;">
+        <span class="wf-reuse-badge" title="src/components/vitrine/service-card.tsx">[REUSE] ServiceCard</span>
+        <div class="wf-card">
+          <div class="wf-card-top"></div>
+          <div class="wf-card-body">
+            <div style="display:flex;justify-content:space-between;align-items:start;gap:4px;margin-bottom:6px;">
+              <div class="wf-card-title">Massage post-partum</div>
+              <div class="wf-badge">À domicile</div>
+            </div>
+            <div class="wf-card-desc">Un moment de bien-être après l'accouchement pour aider le corps à récupérer.</div>
+            <div class="wf-card-meta">
+              <div class="wf-meta-chip">⏱ 1h</div>
+              <div class="wf-meta-chip">€ 80,00 €</div>
+            </div>
+            <div class="wf-card-btn">Réserver →</div>
+          </div>
+        </div>
+      </div>
+      <div style="position: relative;">
+        <span class="wf-reuse-badge" title="src/components/vitrine/service-card.tsx">[REUSE] ServiceCard</span>
+        <div class="wf-card">
+          <div class="wf-card-top"></div>
+          <div class="wf-card-body">
+            <div style="display:flex;justify-content:space-between;align-items:start;gap:4px;margin-bottom:6px;">
+              <div class="wf-card-title">Bain enveloppé bébé</div>
+              <div class="wf-badge">À domicile</div>
+            </div>
+            <div class="wf-card-desc">Un bain sensoriel pour bébé rappelant la vie intra-utérine, moment de détente profonde.</div>
+            <div class="wf-card-meta">
+              <div class="wf-meta-chip">⏱ 45 min</div>
+              <div class="wf-meta-chip">€ 65,00 €</div>
+            </div>
+            <div class="wf-card-btn">Réserver →</div>
+          </div>
+        </div>
+      </div>
+      <div style="position: relative;">
+        <span class="wf-reuse-badge" title="src/components/vitrine/service-card.tsx">[REUSE] ServiceCard</span>
+        <div class="wf-card">
+          <div class="wf-card-top"></div>
+          <div class="wf-card-body">
+            <div style="display:flex;justify-content:space-between;align-items:start;gap:4px;margin-bottom:6px;">
+              <div class="wf-card-title">Soutien allaitement</div>
+              <!-- Fix #1: "les_deux" → "Domicile / Visio" -->
+              <div class="wf-badge">Domicile / Visio ✓</div>
+            </div>
+            <div class="wf-card-desc">Accompagnement personnalisé pour votre allaitement : mise au sein, positions, difficultés.</div>
+            <div class="wf-card-meta">
+              <div class="wf-meta-chip">⏱ 1h</div>
+              <div class="wf-meta-chip">€ 70,00 €</div>
+            </div>
+            <div class="wf-card-btn">Réserver →</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Testimonials -->
+  <div class="wf-section" style="background:#f9f9f9;">
+    <div class="wf-section-header">
+      <h2>Témoignages</h2>
+      <p>Ce que disent les familles accompagnées par Néalma.</p>
+    </div>
+    <div class="wf-grid-3">
+      <!-- REUSABLE: Testimonial x3 from src/components/vitrine/testimonial.tsx -->
+      <div style="position: relative;">
+        <span class="wf-reuse-badge" title="src/components/vitrine/testimonial.tsx">[REUSE] Testimonial</span>
+        <div class="wf-testimonial">
+          <div class="wf-quote-icon">"</div>
+          <div class="wf-testimonial-text">Un moment de pure détente pendant ma grossesse. Le massage prénatal m'a vraiment aidée à soulager mes douleurs de dos.</div>
+          <div class="wf-testimonial-footer">
+            <div class="wf-avatar">S</div>
+            <div>
+              <div class="wf-avatar-name">Sophie M.</div>
+              <div class="wf-avatar-service">Massage prénatal</div>
+            </div>
+            <!-- NEW: Star rating -->
+            <span style="margin-left:auto;font-size:11px;color:#999;">★★★★★</span>
+          </div>
+        </div>
+      </div>
+      <div style="position: relative;">
+        <span class="wf-reuse-badge" title="src/components/vitrine/testimonial.tsx">[REUSE] Testimonial</span>
+        <div class="wf-testimonial">
+          <div class="wf-quote-icon">"</div>
+          <div class="wf-testimonial-text">Le bain enveloppé a été un moment magique pour notre bébé. Il était tellement apaisé, c'était émouvant à regarder.</div>
+          <div class="wf-testimonial-footer">
+            <div class="wf-avatar">C</div>
+            <div>
+              <div class="wf-avatar-name">Camille D.</div>
+              <div class="wf-avatar-service">Bain enveloppé bébé</div>
+            </div>
+            <span style="margin-left:auto;font-size:11px;color:#999;">★★★★★</span>
+          </div>
+        </div>
+      </div>
+      <div style="position: relative;">
+        <span class="wf-reuse-badge" title="src/components/vitrine/testimonial.tsx">[REUSE] Testimonial</span>
+        <div class="wf-testimonial">
+          <div class="wf-quote-icon">"</div>
+          <div class="wf-testimonial-text">Grâce à l'accompagnement en allaitement, j'ai pu surmonter mes difficultés et vivre cette expérience sereinement.</div>
+          <div class="wf-testimonial-footer">
+            <div class="wf-avatar">A</div>
+            <div>
+              <div class="wf-avatar-name">Aurélie T.</div>
+              <div class="wf-avatar-service">Soutien allaitement</div>
+            </div>
+            <span style="margin-left:auto;font-size:11px;color:#999;">★★★★★</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="annotation"><strong>Nouveau :</strong> Ajout d'une note ★★★★★ sur chaque témoignage pour renforcer la confiance.</div>
+  </div>
+
+  <!-- CTA -->
+  <div class="wf-cta-section">
+    <h2>Prête à prendre soin de vous ?</h2>
+    <p>Réservez votre soin à domicile. Je me déplace dans toute l'Île-de-France.</p>
+    <div style="display:flex;gap:12px;justify-content:center;">
+      <div class="wf-btn-primary">Réserver un soin →</div>
+      <div class="wf-btn-secondary">Nous contacter</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     PAGE 2 — SERVICES /services
+══════════════════════════════════════════ -->
+<div class="page-section">
+  <div class="page-label">② PAGE SERVICES — /services <span>(redesign)</span></div>
+  <div class="improvement-note">
+    ⚠️ Améliorations : Fix #9 lien "Réserver ce soin" → /reservation/[slug]. Ajout d'illustrations par soin. Fix #15 : AnimatedBlobs dans le Hero.
+  </div>
+
+  <!-- Hero -->
+  <div style="position: relative;">
+    <span class="wf-reuse-badge" title="src/components/vitrine/hero.tsx + AnimatedBlobs">[REUSE] Hero + AnimatedBlobs</span>
+    <div class="wf-hero">
+      <div class="wf-blob" style="width:160px;height:160px;top:-40px;right:100px;"></div>
+      <h1>Nos soins périnataux</h1>
+      <p>Des soins doux et personnalisés pour chaque étape de votre parcours périnatal, de la grossesse aux premiers mois de bébé.</p>
+    </div>
+  </div>
+
+  <!-- Service detail rows (alternating) -->
+  <div class="wf-section">
+    <!-- Service 1: Massage prénatal -->
+    <div style="display:grid;grid-template-columns:300px 1fr;gap:28px;margin-bottom:48px;align-items:start;">
+      <div style="position:relative;">
+        <span class="wf-reuse-badge" title="src/components/vitrine/service-card.tsx">[REUSE] ServiceCard</span>
+        <div class="wf-card">
+          <div class="wf-card-top"></div>
+          <!-- NEW: Service illustration -->
+          <div style="position:relative;">
+            <span class="wf-new-badge" title="src/components/vitrine/service-illustration.tsx">[NEW] Illustration</span>
+            <div style="height:100px;background:#e8e8e8;display:flex;align-items:center;justify-content:center;font-size:11px;color:#aaa;">[Image : massage prénatal 300×100]</div>
+          </div>
+          <div class="wf-card-body">
+            <div class="wf-card-title">Massage prénatal</div>
+            <div class="wf-badge" style="margin-bottom:8px;">À domicile</div>
+            <div class="wf-card-meta">
+              <div class="wf-meta-chip">⏱ 1h</div>
+              <div class="wf-meta-chip">€ 80,00 €</div>
+            </div>
+            <div class="wf-card-btn">Réserver ce soin →</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h2 style="font-size:18px;margin-bottom:10px;">Massage prénatal</h2>
+        <p style="font-size:12px;color:#555;line-height:1.6;margin-bottom:14px;">Le massage prénatal est un soin tout en douceur, spécialement conçu pour répondre aux besoins des femmes enceintes. Il permet de soulager les tensions musculaires, de réduire les sensations de jambes lourdes et de favoriser un profond relâchement.</p>
+        <h3 style="font-size:13px;margin-bottom:8px;">Les bienfaits</h3>
+        <ul class="wf-pill-list">
+          <li><div class="wf-dot"></div>Soulagement des douleurs dorsales et lombaires</li>
+          <li><div class="wf-dot"></div>Réduction du stress et de l'anxiété</li>
+          <li><div class="wf-dot"></div>Amélioration de la circulation sanguine</li>
+          <li><div class="wf-dot"></div>Moment de connexion avec bébé</li>
+        </ul>
+      </div>
+    </div>
+    <div class="annotation"><strong>Fix #9 :</strong> Le bouton "Réserver ce soin" pointe vers <code>/reservation/massage-prenatal</code> (slug spécifique) et non <code>/reservation</code>.</div>
+    <div class="annotation"><strong>Fix #20 :</strong> Ajout d'une image/illustration pour chaque soin afin de différencier visuellement les cartes.</div>
+    <hr style="margin:24px 0;" />
+    <!-- ... autres services dans le même pattern -->
+    <div style="text-align:center;color:#999;font-size:12px;padding:12px;border:1px dashed #ddd;border-radius:4px;">[ Répéter le même pattern pour Massage post-partum / Bain enveloppé / Soutien allaitement ]</div>
+  </div>
+
+  <!-- Approach section -->
+  <div class="wf-section" style="background:#f5f5f5;">
+    <div class="wf-section-header"><h2>Mon approche</h2></div>
+    <div class="wf-grid-3">
+      <div class="wf-philosophy-card">
+        <div class="wf-icon-circle">[icon]</div>
+        <h3 style="font-size:13px;font-weight:bold;margin-bottom:6px;">À domicile</h3>
+        <p style="font-size:11px;color:#666;">Tous les soins réalisés chez vous, dans le confort de votre foyer.</p>
+      </div>
+      <div class="wf-philosophy-card">
+        <div class="wf-icon-circle">[icon]</div>
+        <h3 style="font-size:13px;font-weight:bold;margin-bottom:6px;">Île-de-France</h3>
+        <p style="font-size:11px;color:#666;">Paris et tous les départements franciliens couverts.</p>
+      </div>
+      <div class="wf-philosophy-card">
+        <div class="wf-icon-circle">[icon]</div>
+        <h3 style="font-size:13px;font-weight:bold;margin-bottom:6px;">Bienveillance</h3>
+        <p style="font-size:11px;color:#666;">Chaque soin adapté à vos besoins, sans jugement.</p>
+      </div>
+    </div>
+    <div class="annotation"><strong>Fix #8 :</strong> Les icônes utilisent des composants Lucide (MapPin, Heart, etc.) au lieu d'entités HTML brutes.</div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     PAGE 3 — À PROPOS /a-propos
+══════════════════════════════════════════ -->
+<div class="page-section">
+  <div class="page-label">③ PAGE À PROPOS — /a-propos <span>(redesign)</span></div>
+  <div class="improvement-note">⚠️ Fix #8 : Remplacer les entités HTML par des icônes Lucide dans la section Philosophie.</div>
+
+  <div style="position: relative;">
+    <span class="wf-reuse-badge" title="AnimatedBlobs">[REUSE] AnimatedBlobs</span>
+    <div class="wf-hero">
+      <div class="wf-blob" style="width:180px;height:180px;top:-50px;right:60px;"></div>
+      <h1>À propos de Néalma</h1>
+      <p>Une infirmière passionnée par l'accompagnement périnatal, au service des familles d'Île-de-France.</p>
+    </div>
+  </div>
+
+  <div class="wf-section">
+    <div class="wf-split">
+      <div>
+        <div class="wf-image-box" style="height:280px;">[Photo : infirmière + bébé 288×320]</div>
+      </div>
+      <div>
+        <h2 style="font-size:18px;margin-bottom:14px;">Qui suis-je ?</h2>
+        <div style="height:12px;background:#e0e0e0;border-radius:2px;margin-bottom:8px;"></div>
+        <div style="height:12px;background:#e0e0e0;border-radius:2px;margin-bottom:8px;width:90%;"></div>
+        <div style="height:12px;background:#e0e0e0;border-radius:2px;margin-bottom:8px;width:95%;"></div>
+        <div style="height:12px;background:#e0e0e0;border-radius:2px;margin-bottom:18px;width:70%;"></div>
+        <div style="height:12px;background:#e0e0e0;border-radius:2px;margin-bottom:8px;"></div>
+        <div style="height:12px;background:#e0e0e0;border-radius:2px;margin-bottom:8px;width:85%;"></div>
+        <div style="height:12px;background:#e0e0e0;border-radius:2px;margin-bottom:8px;width:75%;"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Formations -->
+  <div class="wf-section" style="background:#f5f5f5;">
+    <div class="wf-section-header"><h2>Parcours et formations</h2></div>
+    <div class="wf-grid-2">
+      <div class="wf-card" style="padding:0;">
+        <div class="wf-card-body">
+          <h3 style="font-size:13px;font-weight:bold;margin-bottom:10px;">Formation initiale</h3>
+          <ul class="wf-pill-list">
+            <li><div class="wf-dot"></div>Diplôme d'État d'Infirmière</li>
+            <li><div class="wf-dot"></div>Expérience en service de maternité</li>
+            <li><div class="wf-dot"></div>Expérience en néonatologie</li>
+          </ul>
+        </div>
+      </div>
+      <div class="wf-card" style="padding:0;">
+        <div class="wf-card-body">
+          <h3 style="font-size:13px;font-weight:bold;margin-bottom:10px;">Spécialisations</h3>
+          <ul class="wf-pill-list">
+            <li><div class="wf-dot" style="background:#999;"></div>Certification massage prénatal et post-partum</li>
+            <li><div class="wf-dot" style="background:#999;"></div>Formation bain enveloppé (bain thalasso)</li>
+            <li><div class="wf-dot" style="background:#999;"></div>Accompagnement à l'allaitement maternel</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Philosophy — FIX: Lucide icons instead of HTML entities -->
+  <div class="wf-section">
+    <div class="wf-section-header"><h2>Ma philosophie de soin</h2></div>
+    <div class="wf-grid-3">
+      <!-- Fix #8: using Lucide <Heart /> instead of &#10084; -->
+      <div style="position:relative;">
+        <span class="wf-new-badge" title="Fix: use Lucide Heart icon">[FIX] Lucide Heart</span>
+        <div class="wf-philosophy-card">
+          <div class="wf-icon-circle">[Heart]</div>
+          <h3 style="font-size:13px;font-weight:bold;margin-bottom:6px;">Bienveillance</h3>
+          <p style="font-size:11px;color:#666;line-height:1.5;">Chaque accompagnement dans un cadre chaleureux, sans jugement, où vous vous sentez écoutée.</p>
+        </div>
+      </div>
+      <div style="position:relative;">
+        <span class="wf-new-badge" title="Fix: use Lucide Clock icon">[FIX] Lucide Clock</span>
+        <div class="wf-philosophy-card">
+          <div class="wf-icon-circle">[Clock]</div>
+          <h3 style="font-size:13px;font-weight:bold;margin-bottom:6px;">Respect du rythme</h3>
+          <p style="font-size:11px;color:#666;line-height:1.5;">Je m'adapte à votre rythme et à celui de votre bébé. Chaque famille mérite un accompagnement sur mesure.</p>
+        </div>
+      </div>
+      <div style="position:relative;">
+        <span class="wf-new-badge" title="Fix: use Lucide Award icon">[FIX] Lucide Award</span>
+        <div class="wf-philosophy-card">
+          <div class="wf-icon-circle">[Award]</div>
+          <h3 style="font-size:13px;font-weight:bold;margin-bottom:6px;">Expertise</h3>
+          <p style="font-size:11px;color:#666;line-height:1.5;">Des connaissances solides et une formation continue pour vous offrir des soins de qualité.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     PAGE 4 — CONTACT /contact
+══════════════════════════════════════════ -->
+<div class="page-section">
+  <div class="page-label">④ PAGE CONTACT — /contact <span>(redesign)</span></div>
+  <div class="improvement-note">⚠️ Fix #5 : Attributs <code>autocomplete</code> sur tous les champs. Fix #15 : AnimatedBlobs dans le hero. Nouvelle : carte de zone d'intervention.</div>
+
+  <!-- Hero with AnimatedBlobs (FIX #15) -->
+  <div style="position:relative;">
+    <span class="wf-new-badge" title="Fix #15: add AnimatedBlobs to hero">[FIX] AnimatedBlobs</span>
+    <div class="wf-hero">
+      <div class="wf-blob" style="width:150px;height:150px;top:-30px;right:100px;"></div>
+      <h1>Contact</h1>
+      <p>Une question ou envie de réserver un soin ? N'hésitez pas à me contacter.</p>
+    </div>
+  </div>
+
+  <div class="wf-section">
+    <div class="wf-contact-grid">
+      <!-- Form (REUSE) -->
+      <div style="position:relative;">
+        <span class="wf-reuse-badge" title="src/app/(vitrine)/contact/contact-form.tsx">[REUSE] ContactForm</span>
+        <div>
+          <h2 style="font-size:17px;margin-bottom:16px;">Envoyer un message</h2>
+          <!-- Fix #5: autocomplete attributes shown in wireframe annotations -->
+          <div class="wf-form-field">
+            <label class="wf-form-label">Nom <span style="color:#999;">*</span> <span style="font-size:9px;color:#aaa;">[autocomplete="name"]</span></label>
+            <div class="wf-form-input"></div>
+          </div>
+          <div class="wf-form-field">
+            <label class="wf-form-label">Email <span style="color:#999;">*</span> <span style="font-size:9px;color:#aaa;">[autocomplete="email"]</span></label>
+            <div class="wf-form-input"></div>
+          </div>
+          <div class="wf-form-field">
+            <label class="wf-form-label">Téléphone <span style="font-size:10px;color:#aaa;">(optionnel)</span> <span style="font-size:9px;color:#aaa;">[autocomplete="tel"]</span></label>
+            <div class="wf-form-input"></div>
+          </div>
+          <!-- NEW: Sujet dropdown -->
+          <div style="position:relative;">
+            <span class="wf-new-badge" title="New: subject dropdown">[NEW] Sujet dropdown</span>
+            <div class="wf-form-field">
+              <label class="wf-form-label">Sujet de votre demande</label>
+              <select class="wf-form-select">
+                <option>Choisir un sujet...</option>
+                <option>Demande de renseignement</option>
+                <option>Réservation</option>
+                <option>Question sur un soin</option>
+                <option>Autre</option>
+              </select>
+            </div>
+          </div>
+          <div class="wf-form-field">
+            <label class="wf-form-label">Message <span style="color:#999;">*</span> <span style="font-size:9px;color:#aaa;">[autocomplete="off"]</span></label>
+            <div class="wf-form-textarea"></div>
+          </div>
+          <div class="wf-btn-primary" style="display:inline-block;">Envoyer le message →</div>
+          <div class="annotation" style="margin-top:8px;"><strong>Fix #5 :</strong> <code>autocomplete</code> défini sur chaque input. <strong>Nouveau :</strong> Dropdown "Sujet" pour qualifier la demande.</div>
+        </div>
+      </div>
+
+      <!-- Info + Map -->
+      <div>
+        <h2 style="font-size:17px;margin-bottom:16px;">Coordonnées</h2>
+        <div class="wf-contact-info">
+          <div class="wf-info-item">
+            <div class="wf-info-label">📧 Email</div>
+            <div class="wf-info-value">contact@nealma.fr</div>
+          </div>
+          <div class="wf-info-item">
+            <div class="wf-info-label">📞 Téléphone</div>
+            <div class="wf-info-value">06 00 00 00 00</div>
+          </div>
+          <div class="wf-info-item">
+            <div class="wf-info-label">📍 Zone d'intervention</div>
+            <div class="wf-info-value">Île-de-France (Paris et tous les départements)</div>
+          </div>
+          <div class="wf-info-item">
+            <div class="wf-info-label">🕐 Horaires</div>
+            <div class="wf-info-value">Lun–Sam · 9h00–19h00</div>
+          </div>
+          <!-- NEW: Map placeholder -->
+          <div style="position:relative;">
+            <span class="wf-new-badge" title="New: zone map">[NEW] ZoneMap</span>
+            <div class="wf-map-box">[ Carte zone Île-de-France ]</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     PAGE 5 — BLOG /blog
+══════════════════════════════════════════ -->
+<div class="page-section">
+  <div class="page-label">⑤ PAGE BLOG — /blog <span>(redesign)</span></div>
+  <div class="improvement-note">⚠️ Fix #7 : Harmoniser avec le pattern vitrine (hero chaud + AnimatedBlobs + sections py-20). Fix #11 : Supprimer `font-bold` sur le h1.</div>
+
+  <!-- Hero (FIX #7 + #15) -->
+  <div style="position:relative;">
+    <span class="wf-new-badge" title="Fix #7 #15: add vitrine hero + AnimatedBlobs">[FIX] Hero + AnimatedBlobs</span>
+    <div class="wf-hero">
+      <div class="wf-blob" style="width:160px;height:160px;top:-50px;right:80px;"></div>
+      <h1>Blog</h1>
+      <p>Conseils et articles sur la grossesse, l'allaitement, les soins du bébé et le bien-être périnatal.</p>
+    </div>
+  </div>
+
+  <!-- Filters (NEW) -->
+  <div style="position:relative;">
+    <span class="wf-new-badge" title="New: category filter chips">[NEW] CategoryFilter</span>
+    <div style="padding:16px 24px;border-bottom:1px solid #e0e0e0;display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+      <span style="font-size:11px;color:#888;margin-right:4px;">Filtrer par :</span>
+      <div class="wf-badge" style="cursor:pointer;background:#ddd;">Tous</div>
+      <div class="wf-badge" style="cursor:pointer;">Grossesse</div>
+      <div class="wf-badge" style="cursor:pointer;">Allaitement</div>
+      <div class="wf-badge" style="cursor:pointer;">Bébé</div>
+      <div class="wf-badge" style="cursor:pointer;">Post-partum</div>
+    </div>
+  </div>
+  <div class="annotation" style="margin:0;border-radius:0;"><strong>Nouveau :</strong> Filtres par catégorie pour naviguer dans les articles.</div>
+
+  <!-- Article grid -->
+  <div class="wf-section">
+    <div class="wf-grid-3">
+      <!-- REUSABLE: ArticleCard x3 from src/components/blog/article-card.tsx -->
+      <div style="position:relative;">
+        <span class="wf-reuse-badge" title="src/components/blog/article-card.tsx">[REUSE] ArticleCard</span>
+        <div class="wf-article-card">
+          <div class="wf-article-cover">[Image article 400×200]</div>
+          <div class="wf-article-body">
+            <div class="wf-article-tag">Grossesse</div>
+            <div class="wf-article-title">5 conseils pour soulager les douleurs de dos pendant la grossesse</div>
+            <div class="wf-article-excerpt">Découvrez des gestes simples pour prendre soin de votre dos pendant cette période de transformation...</div>
+            <div class="wf-article-meta">12 mars 2026 · 5 min de lecture</div>
+          </div>
+        </div>
+      </div>
+      <div style="position:relative;">
+        <span class="wf-reuse-badge" title="src/components/blog/article-card.tsx">[REUSE] ArticleCard</span>
+        <div class="wf-article-card">
+          <div class="wf-article-cover">[Image article 400×200]</div>
+          <div class="wf-article-body">
+            <div class="wf-article-tag">Allaitement</div>
+            <div class="wf-article-title">Allaitement : comment gérer les premières semaines</div>
+            <div class="wf-article-excerpt">Les premières semaines d'allaitement peuvent être complexes. Voici des conseils pratiques pour...</div>
+            <div class="wf-article-meta">5 mars 2026 · 7 min de lecture</div>
+          </div>
+        </div>
+      </div>
+      <div style="position:relative;">
+        <span class="wf-reuse-badge" title="src/components/blog/article-card.tsx">[REUSE] ArticleCard</span>
+        <div class="wf-article-card">
+          <div class="wf-article-cover">[Image article 400×200]</div>
+          <div class="wf-article-body">
+            <div class="wf-article-tag">Bébé</div>
+            <div class="wf-article-title">Le bain enveloppé : pourquoi c'est si apaisant pour bébé ?</div>
+            <div class="wf-article-excerpt">Inspiré du bain thalasso, le bain enveloppé reproduit les sensations de la vie intra-utérine...</div>
+            <div class="wf-article-meta">28 fév. 2026 · 4 min de lecture</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- NEW: Newsletter CTA -->
+    <div style="position:relative;margin-top:32px;">
+      <span class="wf-new-badge" title="New: newsletter signup">[NEW] NewsletterCTA</span>
+      <div style="border:1px solid #ccc;border-radius:4px;padding:24px;background:#f9f9f9;text-align:center;">
+        <h3 style="font-size:15px;margin-bottom:8px;">Recevez nos conseils par email</h3>
+        <p style="font-size:12px;color:#666;margin-bottom:16px;">Inscrivez-vous pour recevoir nos nouveaux articles directement dans votre boîte mail.</p>
+        <div style="display:flex;gap:8px;justify-content:center;max-width:400px;margin:0 auto;">
+          <div class="wf-form-input" style="flex:1;"></div>
+          <div class="wf-btn-primary" style="white-space:nowrap;">S'inscrire</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     PAGE 6 — RÉSERVATION /reservation
+══════════════════════════════════════════ -->
+<div class="page-section">
+  <div class="page-label">⑥ PAGE RÉSERVATION — /reservation <span>(redesign)</span></div>
+  <div class="improvement-note">⚠️ Fix #2 : Déplacer dans le groupe (vitrine) → ajouter Header + Footer. Fix #11 : Supprimer `font-bold` sur le h1.</div>
+
+  <!-- FIX #2: Header added -->
+  <div style="position:relative;">
+    <span class="wf-new-badge" title="Fix #2: add Header via (vitrine) group">[FIX] Header (manquant)</span>
+    <div class="wf-header">
+      <div class="wf-logo">Néalma</div>
+      <div class="wf-nav">
+        <a href="#">Accueil</a><a href="#">Services</a><a href="#">Blog</a><a href="#">À propos</a><a href="#">Contact</a>
+      </div>
+      <div class="wf-cta-btn">Réserver →</div>
+    </div>
+  </div>
+  <div class="annotation" style="margin:0;border-radius:0;"><strong>Fix #2 :</strong> La page /reservation est déplacée dans le groupe route <code>(vitrine)</code> ou le Header/Footer est ajouté manuellement.</div>
+
+  <div class="wf-section">
+    <div class="wf-section-header">
+      <h2>Réserver un rendez-vous</h2>
+      <p>Choisissez le soin qui vous correspond et réservez votre créneau en ligne.</p>
+    </div>
+
+    <!-- Stepper (NEW) -->
+    <div style="position:relative;max-width:600px;margin:0 auto 28px;">
+      <span class="wf-new-badge" title="New: booking progress stepper">[NEW] BookingStepper</span>
+      <div class="wf-booking-progress">
+        <div class="wf-step active">① Choisir un soin</div>
+        <div class="wf-step">② Choisir un créneau</div>
+        <div class="wf-step">③ Vos coordonnées</div>
+        <div class="wf-step">④ Confirmation</div>
+      </div>
+    </div>
+    <div class="annotation"><strong>Nouveau :</strong> Stepper de progression pour le tunnel de réservation (4 étapes).</div>
+
+    <div class="wf-grid-2" style="max-width:800px;margin:0 auto;">
+      <!-- REUSABLE: Card x4 from @/components/ui/card -->
+      <div style="position:relative;">
+        <span class="wf-reuse-badge" title="@/components/ui/card">[REUSE] Card</span>
+        <div class="wf-card">
+          <div class="wf-card-body">
+            <div class="wf-card-title">Massage prénatal</div>
+            <div class="wf-card-desc">Un moment de détente et de bien-être pendant votre grossesse.</div>
+            <div class="wf-card-meta">
+              <div class="wf-meta-chip">⏱ 60 min</div>
+              <div class="wf-meta-chip">€ 80,00 €</div>
+              <div class="wf-badge">À Domicile</div>
+            </div>
+            <div class="wf-card-btn">Réserver ce soin →</div>
+          </div>
+        </div>
+      </div>
+      <div style="position:relative;">
+        <span class="wf-reuse-badge" title="@/components/ui/card">[REUSE] Card</span>
+        <div class="wf-card">
+          <div class="wf-card-body">
+            <div class="wf-card-title">Massage post-partum</div>
+            <div class="wf-card-desc">Retrouvez bien-être et sérénité après l'accouchement.</div>
+            <div class="wf-card-meta">
+              <div class="wf-meta-chip">⏱ 60 min</div>
+              <div class="wf-meta-chip">€ 80,00 €</div>
+              <div class="wf-badge">À Domicile</div>
+            </div>
+            <div class="wf-card-btn">Réserver ce soin →</div>
+          </div>
+        </div>
+      </div>
+      <div style="position:relative;">
+        <span class="wf-reuse-badge" title="@/components/ui/card">[REUSE] Card</span>
+        <div class="wf-card">
+          <div class="wf-card-body">
+            <div class="wf-card-title">Bain enveloppé bébé</div>
+            <div class="wf-card-desc">Une expérience douce et sensorielle pour votre nouveau-né.</div>
+            <div class="wf-card-meta">
+              <div class="wf-meta-chip">⏱ 45 min</div>
+              <div class="wf-meta-chip">€ 65,00 €</div>
+              <div class="wf-badge">À Domicile</div>
+            </div>
+            <div class="wf-card-btn">Réserver ce soin →</div>
+          </div>
+        </div>
+      </div>
+      <div style="position:relative;">
+        <span class="wf-reuse-badge" title="@/components/ui/card">[REUSE] Card</span>
+        <div class="wf-card">
+          <div class="wf-card-body">
+            <div class="wf-card-title">Soutien allaitement</div>
+            <div class="wf-card-desc">Accompagnement personnalisé pour un allaitement serein.</div>
+            <div class="wf-card-meta">
+              <div class="wf-meta-chip">⏱ 60 min</div>
+              <div class="wf-meta-chip">€ 70,00 €</div>
+              <div class="wf-badge">Domicile / Visio ✓</div>
+            </div>
+            <div class="wf-card-btn">Réserver ce soin →</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     PAGE 7 — LOGIN /login
+══════════════════════════════════════════ -->
+<div class="page-section">
+  <div class="page-label">⑦ PAGE LOGIN — /login <span>(redesign)</span></div>
+  <div class="improvement-note">⚠️ Fix #6 : Remplacer `bg-zinc-50` par `bg-nealma-bg-warm`. Aligner l'identité visuelle avec le reste du site.</div>
+
+  <!-- Login with nealma warm bg (FIX #6) -->
+  <div style="position:relative;">
+    <span class="wf-new-badge" title="Fix #6: use nealma-bg-warm token">[FIX] nealma-bg-warm</span>
+    <div class="wf-login-wrap">
+      <div class="wf-blob" style="width:200px;height:200px;top:0;right:0;position:fixed;"></div>
+      <div class="wf-login-card">
+        <div class="wf-login-logo">Néalma</div>
+        <div class="wf-login-sub">Connectez-vous à votre espace administrateur</div>
+        <div class="wf-form-field">
+          <label class="wf-form-label">Email</label>
+          <div class="wf-form-input"></div>
+        </div>
+        <div class="wf-form-field">
+          <label class="wf-form-label">Mot de passe</label>
+          <div class="wf-form-input"></div>
+        </div>
+        <!-- NEW: Forgot password link -->
+        <div style="text-align:right;margin-bottom:12px;font-size:10px;color:#888;position:relative;">
+          <span class="wf-new-badge" style="position:static;display:inline;">[NEW]</span> Mot de passe oublié ?
+        </div>
+        <div class="wf-btn-primary" style="width:100%;text-align:center;display:block;">Se connecter →</div>
+      </div>
+    </div>
+  </div>
+  <div class="annotation"><strong>Fix #6 :</strong> Fond <code>bg-nealma-bg-warm</code> au lieu de <code>bg-zinc-50</code>. <strong>Nouveau :</strong> Lien "Mot de passe oublié ?" pour compléter le flux d'authentification.</div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     PAGE 8 — DASHBOARD /dashboard
+══════════════════════════════════════════ -->
+<div class="page-section">
+  <div class="page-label">⑧ DASHBOARD — /dashboard <span>(redesign)</span></div>
+  <div class="improvement-note">⚠️ Fix #14 : Différencier les icônes Google Ads / TikTok Ads dans la sidebar. Fix #22 : Ajouter des deltas aux StatsCards.</div>
+
+  <div class="wf-dash-layout">
+    <!-- Sidebar -->
+    <div class="wf-sidebar">
+      <div class="wf-sidebar-logo">Néalma</div>
+      <div class="wf-sidebar-nav">
+        <div class="wf-nav-item active"><div class="wf-nav-icon"></div>Vue d'ensemble</div>
+        <div class="wf-nav-item"><div class="wf-nav-icon"></div>Rendez-vous</div>
+        <div class="wf-nav-item"><div class="wf-nav-icon"></div>Blog</div>
+        <!-- Fix #14: distinct icons for Ads -->
+        <div style="position:relative;">
+          <span class="wf-new-badge" style="top:6px;right:4px;">[FIX]</span>
+          <div class="wf-nav-item"><div class="wf-nav-icon" style="font-size:9px;display:flex;align-items:center;justify-content:center;">G</div>Google Ads</div>
+        </div>
+        <div style="position:relative;">
+          <span class="wf-new-badge" style="top:6px;right:4px;">[FIX]</span>
+          <div class="wf-nav-item"><div class="wf-nav-icon" style="font-size:9px;display:flex;align-items:center;justify-content:center;">T</div>TikTok Ads</div>
+        </div>
+        <div class="wf-nav-item"><div class="wf-nav-icon"></div>Paramètres</div>
+      </div>
+      <div style="border-top:1px solid #e0e0e0;padding:8px;">
+        <div class="wf-nav-item" style="font-size:10px;color:#999;">↗ Voir le site</div>
+        <div class="wf-nav-item" style="font-size:10px;color:#999;">← Déconnexion</div>
+      </div>
+    </div>
+
+    <!-- Main content -->
+    <div class="wf-dash-main">
+      <h1 style="font-size:16px;font-weight:bold;margin-bottom:20px;">Vue d'ensemble — Mars 2026</h1>
+      <!-- Stats row with DELTA (Fix #22) -->
+      <div style="position:relative;">
+        <span class="wf-new-badge" title="Fix #22: add trend delta to StatsCard">[FIX] Trend delta</span>
+        <div class="wf-stats-row">
+          <div class="wf-stat-card">
+            <div class="wf-stat-title">RDV ce mois</div>
+            <div class="wf-stat-value">12</div>
+            <div class="wf-stat-delta">↑ +3 vs mois dernier</div>
+            <div class="wf-stat-icon">📅</div>
+          </div>
+          <div class="wf-stat-card">
+            <div class="wf-stat-title">Revenus</div>
+            <div class="wf-stat-value">920 €</div>
+            <div class="wf-stat-delta">↑ +12% vs mois dernier</div>
+            <div class="wf-stat-icon">€</div>
+          </div>
+          <div class="wf-stat-card">
+            <div class="wf-stat-title">Articles publiés</div>
+            <div class="wf-stat-value">8</div>
+            <div class="wf-stat-delta">Total</div>
+            <div class="wf-stat-icon">📝</div>
+          </div>
+          <div class="wf-stat-card">
+            <div class="wf-stat-title">Messages non lus</div>
+            <div class="wf-stat-value">3</div>
+            <div class="wf-stat-delta">↓ -2 vs hier</div>
+            <div class="wf-stat-icon">✉</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick actions (NEW) -->
+      <div style="margin-top:20px;position:relative;">
+        <span class="wf-new-badge" title="New: quick actions">[NEW] QuickActions</span>
+        <h2 style="font-size:13px;font-weight:bold;margin-bottom:10px;">Actions rapides</h2>
+        <div style="display:flex;gap:10px;">
+          <div class="wf-btn-primary" style="font-size:11px;padding:8px 14px;">+ Nouvel article</div>
+          <div class="wf-btn-secondary" style="font-size:11px;padding:8px 14px;">Voir les messages</div>
+          <div class="wf-btn-secondary" style="font-size:11px;padding:8px 14px;">Gérer les RDV</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SHARED FOOTER (redesign)
+══════════════════════════════════════════ -->
+<div class="page-section">
+  <div class="page-label">📌 FOOTER PARTAGÉ — amélioration <span>(toutes les pages vitrine)</span></div>
+  <div class="improvement-note">
+    ⚠️ Fix #3 : Supprimer le lien /mentions-legales tant que la page n'existe pas (ou la créer). Fix #19 : Ajouter liens réseaux sociaux. Nouvelle colonne "Soins".
+  </div>
+  <div style="position:relative;">
+    <span class="wf-reuse-badge" title="src/components/vitrine/footer.tsx">[REUSE] Footer</span>
+    <div class="wf-footer">
+      <div class="wf-footer-grid">
+        <div class="wf-footer-col">
+          <div style="font-size:16px;font-weight:bold;margin-bottom:8px;">Néalma</div>
+          <p>Infirmière diplômée spécialisée en accompagnement périnatal. Soins à domicile en Île-de-France.</p>
+          <!-- NEW: social links -->
+          <div style="position:relative;display:inline-block;margin-top:8px;">
+            <span class="wf-new-badge" title="Fix #19: social links">[NEW] Réseaux</span>
+            <div class="wf-social-row" style="margin-top:24px;">
+              <div class="wf-social-btn">In</div>
+              <div class="wf-social-btn">Ig</div>
+              <div class="wf-social-btn">Fb</div>
+            </div>
+          </div>
+        </div>
+        <div class="wf-footer-col">
+          <h4>Navigation</h4>
+          <a href="#">Accueil</a><a href="#">Services</a><a href="#">Blog</a><a href="#">À propos</a><a href="#">Contact</a>
+        </div>
+        <!-- NEW: Soins column -->
+        <div style="position:relative;" class="wf-footer-col">
+          <span class="wf-new-badge" title="New: soins column in footer">[NEW] Colonne Soins</span>
+          <h4 style="margin-top:20px;">Nos soins</h4>
+          <a href="#">Massage prénatal</a>
+          <a href="#">Massage post-partum</a>
+          <a href="#">Bain enveloppé bébé</a>
+          <a href="#">Soutien allaitement</a>
+        </div>
+        <div class="wf-footer-col">
+          <h4>Contact</h4>
+          <a href="#">📧 contact@nealma.fr</a>
+          <a href="#">📞 06 00 00 00 00</a>
+          <p>📍 Île-de-France</p>
+          <p>🕐 Lun–Sam · 9h–19h</p>
+        </div>
+      </div>
+      <div class="wf-footer-bottom">
+        <span>© 2026 Néalma. Tous droits réservés.</span>
+        <!-- Fix #3: mentions-legales either created or removed -->
+        <span>Mentions légales <span style="font-size:9px;color:#f59e0b;">[Fix #3 : créer cette page]</span> · Politique de confidentialité</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SUMMARY OF ALL FIXES IN THIS WIREFRAME
+══════════════════════════════════════════ -->
+<div class="legend" style="margin-top:0;">
+  <h1>✅ Récapitulatif des corrections intégrées dans ce wireframe</h1>
+  <table style="width:100%;border-collapse:collapse;font-size:11px;margin-top:10px;">
+    <thead>
+      <tr style="border-bottom:1px solid #ccc;">
+        <th style="text-align:left;padding:4px 8px;color:#555;">Fix #</th>
+        <th style="text-align:left;padding:4px 8px;color:#555;">Issue</th>
+        <th style="text-align:left;padding:4px 8px;color:#555;">Page</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="border-bottom:1px solid #eee;"><td style="padding:4px 8px;">#1</td><td style="padding:4px 8px;">modalityLabel "les_deux" → "Domicile / Visio"</td><td style="padding:4px 8px;">Accueil, Services</td></tr>
+      <tr style="border-bottom:1px solid #eee;"><td style="padding:4px 8px;">#2</td><td style="padding:4px 8px;">Header + Footer manquants sur /reservation</td><td style="padding:4px 8px;">Réservation</td></tr>
+      <tr style="border-bottom:1px solid #eee;"><td style="padding:4px 8px;">#3</td><td style="padding:4px 8px;">Lien /mentions-legales (404) → créer la page</td><td style="padding:4px 8px;">Footer</td></tr>
+      <tr style="border-bottom:1px solid #eee;"><td style="padding:4px 8px;">#4</td><td style="padding:4px 8px;">État actif sur lien de nav courant</td><td style="padding:4px 8px;">Header</td></tr>
+      <tr style="border-bottom:1px solid #eee;"><td style="padding:4px 8px;">#5</td><td style="padding:4px 8px;">autocomplete sur les champs formulaire contact</td><td style="padding:4px 8px;">Contact</td></tr>
+      <tr style="border-bottom:1px solid #eee;"><td style="padding:4px 8px;">#6</td><td style="padding:4px 8px;">Login bg-zinc-50 → bg-nealma-bg-warm</td><td style="padding:4px 8px;">Login</td></tr>
+      <tr style="border-bottom:1px solid #eee;"><td style="padding:4px 8px;">#7</td><td style="padding:4px 8px;">Blog sans hero/blobs → harmoniser avec layout vitrine</td><td style="padding:4px 8px;">Blog</td></tr>
+      <tr style="border-bottom:1px solid #eee;"><td style="padding:4px 8px;">#8</td><td style="padding:4px 8px;">Entités HTML brutes → icônes Lucide (Heart, Clock, Award)</td><td style="padding:4px 8px;">À propos</td></tr>
+      <tr style="border-bottom:1px solid #eee;"><td style="padding:4px 8px;">#9</td><td style="padding:4px 8px;">Bouton "Réserver" → /reservation/[slug]</td><td style="padding:4px 8px;">Services</td></tr>
+      <tr style="border-bottom:1px solid #eee;"><td style="padding:4px 8px;">#14</td><td style="padding:4px 8px;">Icônes distinctes pour Google Ads / TikTok Ads</td><td style="padding:4px 8px;">Dashboard sidebar</td></tr>
+      <tr style="border-bottom:1px solid #eee;"><td style="padding:4px 8px;">#15</td><td style="padding:4px 8px;">AnimatedBlobs dans les hero Contact + Blog</td><td style="padding:4px 8px;">Contact, Blog</td></tr>
+      <tr style="border-bottom:1px solid #eee;"><td style="padding:4px 8px;">#19</td><td style="padding:4px 8px;">Liens réseaux sociaux + colonne Soins dans footer</td><td style="padding:4px 8px;">Footer</td></tr>
+      <tr><td style="padding:4px 8px;">#22</td><td style="padding:4px 8px;">Delta de tendance sur les StatsCards du dashboard</td><td style="padding:4px 8px;">Dashboard</td></tr>
+    </tbody>
+  </table>
+</div>
+
+</body>
+</html>

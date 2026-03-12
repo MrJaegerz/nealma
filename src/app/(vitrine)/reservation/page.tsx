@@ -12,6 +12,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { createClient } from "@/lib/supabase/server";
 import { formatPrice } from "@/lib/stripe";
+import { modalityLabel } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "Réserver un rendez-vous",
@@ -75,7 +76,7 @@ export default async function ReservationPage() {
   return (
     <div className="container mx-auto px-4 py-16">
       <div className="text-center mb-12">
-        <h1 className="text-4xl font-heading font-bold text-nealma-text">
+        <h1 className="text-4xl font-heading text-nealma-text">
           Réserver un rendez-vous
         </h1>
         <p className="mt-4 text-lg text-nealma-text-light max-w-2xl mx-auto">
@@ -105,13 +106,9 @@ export default async function ReservationPage() {
                   <Euro className="h-4 w-4" />
                   {formatPrice(service.price_cents)}
                 </div>
-                <Badge variant="secondary" className="capitalize">
+                <Badge variant="secondary">
                   <MapPin className="h-3 w-3 mr-1" />
-                  {service.modality === "les_deux"
-                    ? "Domicile / Visio"
-                    : service.modality === "visio"
-                      ? "Visio"
-                      : "À domicile"}
+                  {modalityLabel(service.modality)}
                 </Badge>
               </div>
             </CardContent>

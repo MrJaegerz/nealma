@@ -19,10 +19,10 @@ export function Hero() {
           </p>
           <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Button asChild size="lg">
-              <Link href="/services">Découvrir nos services</Link>
+              <Link href="/services" aria-label="Découvrir nos services périnataux">Découvrir nos services</Link>
             </Button>
             <Button asChild variant="secondary" size="lg">
-              <Link href="/reservation">Prendre rendez-vous</Link>
+              <Link href="/reservation" aria-label="Prendre rendez-vous pour un soin">Prendre rendez-vous</Link>
             </Button>
           </div>
         </div>
