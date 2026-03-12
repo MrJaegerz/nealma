@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import { AnimatedBlobs } from "@/components/ui/animated-blobs";
 import Link from "next/link";
 
 export const metadata: Metadata = {
@@ -13,8 +14,9 @@ export default function AProposPage() {
   return (
     <>
       {/* Hero */}
-      <section className="bg-nealma-bg-warm py-20 px-4 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-4xl text-center">
+      <section className="relative isolate overflow-hidden bg-nealma-bg-warm py-20 px-4 sm:px-6 lg:px-8">
+        <AnimatedBlobs />
+        <div className="relative mx-auto max-w-4xl text-center">
           <h1 className="text-4xl font-heading text-nealma-text sm:text-5xl">
             À propos de Néalma
           </h1>
@@ -70,8 +72,9 @@ export default function AProposPage() {
       </section>
 
       {/* Parcours & Certifications */}
-      <section className="bg-nealma-bg-warm py-20 px-4 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-5xl">
+      <section className="relative isolate overflow-hidden bg-nealma-bg-warm py-20 px-4 sm:px-6 lg:px-8">
+        <AnimatedBlobs />
+        <div className="relative mx-auto max-w-5xl">
           <h2 className="mb-12 text-center text-3xl font-heading text-nealma-text sm:text-4xl">
             Parcours et formations
           </h2>
@@ -191,9 +194,9 @@ export default function AProposPage() {
             </Button>
             <Button
               asChild
-              variant="outline"
+              variant="ghost"
               size="lg"
-              className="border-white text-white hover:bg-white/10"
+              className="border border-white text-white hover:bg-white/10 hover:text-white"
             >
               <Link href="/services">Voir les soins</Link>
             </Button>

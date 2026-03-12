@@ -4,6 +4,7 @@ import { Hero } from "@/components/vitrine/hero";
 import { ServiceCard } from "@/components/vitrine/service-card";
 import { Testimonial } from "@/components/vitrine/testimonial";
 import { Button } from "@/components/ui/button";
+import { AnimatedBlobs } from "@/components/ui/animated-blobs";
 
 export const metadata: Metadata = {
   title: "Accompagnement périnatal à domicile en Île-de-France",
@@ -126,9 +127,10 @@ export default function HomePage() {
       {/* Services */}
       <section
         id="services"
-        className="bg-nealma-bg-warm py-20 px-4 sm:px-6 lg:px-8"
+        className="relative isolate overflow-hidden bg-nealma-bg-warm py-20 px-4 sm:px-6 lg:px-8"
       >
-        <div className="mx-auto max-w-6xl">
+        <AnimatedBlobs />
+        <div className="relative mx-auto max-w-6xl">
           <div className="mb-12 text-center">
             <h2 className="text-3xl font-heading text-nealma-text sm:text-4xl">
               Nos soins
@@ -185,9 +187,9 @@ export default function HomePage() {
             </Button>
             <Button
               asChild
-              variant="outline"
+              variant="ghost"
               size="lg"
-              className="border-white text-white hover:bg-white/10"
+              className="border border-white text-white hover:bg-white/10 hover:text-white"
             >
               <Link href="/contact">Nous contacter</Link>
             </Button>
