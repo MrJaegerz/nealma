@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { Button } from "@/components/ui/button";
@@ -45,8 +46,15 @@ export default function LoginPage() {
     <div className="flex min-h-screen items-center justify-center bg-nealma-bg-warm px-4">
       <Card className="w-full max-w-sm">
         <CardHeader className="text-center">
-          <CardTitle className="font-heading text-2xl tracking-tight">
-            N&eacute;alma
+          <CardTitle className="flex justify-center">
+            <Image
+              src="/images/logo.avif"
+              alt="Néalma"
+              width={64}
+              height={64}
+              className="h-16 w-16 rounded-full object-cover"
+              priority
+            />
           </CardTitle>
           <CardDescription>
             Connectez-vous &agrave; votre espace administrateur
@@ -59,7 +67,7 @@ export default function LoginPage() {
               <Input
                 id="email"
                 type="email"
-                placeholder="admin@nealma.fr"
+                placeholder="exemple@exemple.fr"
                 autoComplete="email"
                 required
                 value={email}
@@ -91,9 +99,7 @@ export default function LoginPage() {
               </button>
             </div>
 
-            {error && (
-              <p className="text-sm text-destructive">{error}</p>
-            )}
+            {error && <p className="text-sm text-destructive">{error}</p>}
 
             <Button type="submit" className="w-full" disabled={loading}>
               {loading ? "Connexion..." : "Se connecter"}

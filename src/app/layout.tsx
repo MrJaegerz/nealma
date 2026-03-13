@@ -46,6 +46,10 @@ export const metadata: Metadata = {
     description:
       "Soins périnataux à domicile en Île-de-France par une infirmière spécialisée.",
   },
+  icons: {
+    icon: "/images/icon-192.png",
+    apple: "/images/apple-touch-icon.png",
+  },
   robots: {
     index: true,
     follow: true,

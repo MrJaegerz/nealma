@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Menu } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -32,9 +33,14 @@ export function Header() {
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2">
-          <span className="font-heading text-2xl tracking-tight text-nealma-400">
-            Néalma
-          </span>
+          <Image
+            src="/images/logo.avif"
+            alt="Néalma"
+            width={44}
+            height={44}
+            className="h-11 w-11 rounded-full object-cover"
+            priority
+          />
         </Link>
 
         {/* Desktop navigation */}
@@ -82,8 +88,14 @@ export function Header() {
           </SheetTrigger>
           <SheetContent side="right" className="w-72">
             <SheetHeader>
-              <SheetTitle className="font-heading text-xl text-nealma-400">
-                Néalma
+              <SheetTitle>
+                <Image
+                  src="/images/logo.avif"
+                  alt="Néalma"
+                  width={40}
+                  height={40}
+                  className="h-10 w-10 rounded-full object-cover"
+                />
               </SheetTitle>
             </SheetHeader>
             <nav className="flex flex-col gap-1 px-4">

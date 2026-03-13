@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import {
   LayoutDashboard,
@@ -78,12 +79,14 @@ function NavContent({
     <div className="flex h-full flex-col">
       {/* Logo */}
       <div className="px-6 py-6">
-        <Link
-          href="/dashboard"
-          className="font-heading text-2xl font-bold text-nealma-400"
-          onClick={onNavigate}
-        >
-          N&eacute;alma
+        <Link href="/dashboard" onClick={onNavigate}>
+          <Image
+            src="/images/logo.avif"
+            alt="Néalma"
+            width={44}
+            height={44}
+            className="h-11 w-11 rounded-full object-cover"
+          />
         </Link>
       </div>
 
@@ -166,9 +169,13 @@ export function Sidebar() {
             <NavContent pathname={pathname} onNavigate={() => setOpen(false)} />
           </SheetContent>
         </Sheet>
-        <span className="ml-3 font-heading text-lg font-bold text-nealma-400">
-          N&eacute;alma
-        </span>
+        <Image
+          src="/images/logo.avif"
+          alt="Néalma"
+          width={40}
+          height={40}
+          className="ml-3 h-10 w-10 rounded-full object-cover"
+        />
       </div>
 
       {/* Mobile spacer so content is not hidden behind the fixed header */}

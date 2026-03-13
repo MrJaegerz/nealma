@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Mail, Phone, MapPin, Clock } from "lucide-react";
 
 const navigationLinks = [
@@ -24,9 +25,13 @@ export function Footer() {
           {/* About column */}
           <div className="space-y-4">
             <Link href="/" className="inline-block">
-              <span className="font-heading text-2xl tracking-tight text-nealma-400">
-                Néalma
-              </span>
+              <Image
+                src="/images/logo.avif"
+                alt="Néalma"
+                width={48}
+                height={48}
+                className="h-12 w-12 rounded-full object-cover"
+              />
             </Link>
             <p className="max-w-xs text-sm leading-relaxed text-nealma-text-light">
               Infirmière diplômée spécialisée en accompagnement périnatal.
