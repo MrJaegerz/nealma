@@ -198,7 +198,7 @@ export default function ServicesPage() {
                 </div>
 
                 <Button asChild className="mt-2">
-                  <Link href={`/reservation/${service.slug}`}>
+                  <Link href={`/services/${service.slug}`}>
                     Réserver ce soin
                   </Link>
                 </Button>

@@ -11,10 +11,10 @@ const navigationLinks = [
 ] as const;
 
 const soinsLinks = [
-  { href: "/reservation/massage-prenatal", label: "Massage prénatal" },
-  { href: "/reservation/massage-post-partum", label: "Massage post-partum" },
-  { href: "/reservation/bain-enveloppe-bebe", label: "Bain enveloppé bébé" },
-  { href: "/reservation/soutien-allaitement", label: "Soutien allaitement" },
+  { href: "/services/massage-prenatal", label: "Massage prénatal" },
+  { href: "/services/massage-post-partum", label: "Massage post-partum" },
+  { href: "/services/bain-enveloppe-bebe", label: "Bain enveloppé bébé" },
+  { href: "/services/soutien-allaitement", label: "Soutien allaitement" },
 ] as const;
 
 export function Footer() {

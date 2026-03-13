@@ -95,7 +95,7 @@ export function ServiceCard({
 
       <CardFooter className="mt-auto">
         <Button asChild className="w-full">
-          <Link href={`/reservation/${slug}`}>Réserver</Link>
+          <Link href={`/services/${slug}`}>Réserver</Link>
         </Button>
       </CardFooter>
     </Card>

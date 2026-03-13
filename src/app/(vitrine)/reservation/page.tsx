@@ -124,7 +124,7 @@ export default async function ReservationPage() {
                 </CardContent>
                 <CardFooter>
                   <Button asChild className="w-full">
-                    <Link href={`/reservation/${service.slug}`}>
+                    <Link href={`/services/${service.slug}`}>
                       Réserver ce soin
                     </Link>
                   </Button>
