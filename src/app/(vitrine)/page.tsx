@@ -22,6 +22,8 @@ const services = [
     priceCents: 8000,
     modality: "domicile",
     slug: "massage-prenatal",
+    imageUrl: "/images/massage-prenatal.avif",
+    imageAlt: "Femme enceinte sereine recevant un massage prénatal doux",
   },
   {
     name: "Massage post-partum",
@@ -31,6 +33,8 @@ const services = [
     priceCents: 8000,
     modality: "domicile",
     slug: "massage-post-partum",
+    imageUrl: "/images/massage-post-partum.avif",
+    imageAlt: "Jeune maman paisible se reposant après l'accouchement",
   },
   {
     name: "Bain enveloppé bébé",
@@ -40,6 +44,8 @@ const services = [
     priceCents: 6500,
     modality: "domicile",
     slug: "bain-enveloppe-bebe",
+    imageUrl: "/images/bain-bebe.avif",
+    imageAlt: "Bébé apaisé dans un bain enveloppé inspiré du bain thalasso",
   },
   {
     name: "Soutien allaitement",
@@ -49,6 +55,8 @@ const services = [
     priceCents: 7000,
     modality: "les_deux",
     slug: "soutien-allaitement",
+    imageUrl: "/images/soutient-allaitement.avif",
+    imageAlt: "Maman allaitant son nouveau-né avec tendresse et sérénité",
   },
 ];
 

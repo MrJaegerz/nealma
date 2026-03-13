@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
-import { Home, MapPin, Heart } from "lucide-react";
-import { ServiceCard } from "@/components/vitrine/service-card";
+import Image from "next/image";
+import { Home, MapPin, Heart, Clock, Euro } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { AnimatedBlobs } from "@/components/ui/animated-blobs";
+import { modalityLabel } from "@/lib/utils";
 import Link from "next/link";
 
 export const metadata: Metadata = {
@@ -11,6 +13,20 @@ export const metadata: Metadata = {
     "Découvrez nos soins périnataux à domicile en Île-de-France : massage prénatal, massage post-partum, bain enveloppé bébé et soutien à l'allaitement. Tarifs et détails.",
 };
 
+function formatPrice(cents: number): string {
+  return new Intl.NumberFormat("fr-FR", {
+    style: "currency",
+    currency: "EUR",
+  }).format(cents / 100);
+}
+
+function formatDuration(minutes: number): string {
+  if (minutes < 60) return `${minutes} min`;
+  const h = Math.floor(minutes / 60);
+  const m = minutes % 60;
+  return m > 0 ? `${h}h${String(m).padStart(2, "0")}` : `${h}h`;
+}
+
 const services = [
   {
     name: "Massage prénatal",
@@ -18,6 +34,9 @@ const services = [
     durationMinutes: 60,
     priceCents: 8000,
     modality: "domicile",
+    imageUrl: "/images/massage-prenatal.avif",
+    imageAlt:
+      "Femme enceinte sereine recevant un massage prénatal doux",
     description:
       "Un massage doux et enveloppant adapté à la grossesse pour soulager les tensions, favoriser la détente et accompagner les transformations du corps.",
     longDescription:
@@ -36,6 +55,9 @@ const services = [
     durationMinutes: 60,
     priceCents: 8000,
     modality: "domicile",
+    imageUrl: "/images/massage-post-partum.avif",
+    imageAlt:
+      "Jeune maman paisible se reposant après l'accouchement",
     description:
       "Un moment de bien-être après l'accouchement pour aider le corps à récupérer, relâcher les tensions et se reconnecter à soi.",
     longDescription:
@@ -54,6 +76,9 @@ const services = [
     durationMinutes: 45,
     priceCents: 6500,
     modality: "domicile",
+    imageUrl: "/images/bain-bebe.avif",
+    imageAlt:
+      "Bébé apaisé dans un bain enveloppé inspiré du bain thalasso",
     description:
       "Un bain sensoriel inspiré du bain thalasso, offrant à bébé un moment de détente en douceur qui rappelle la vie intra-utérine.",
     longDescription:
@@ -72,6 +97,9 @@ const services = [
     durationMinutes: 60,
     priceCents: 7000,
     modality: "les_deux",
+    imageUrl: "/images/soutient-allaitement.avif",
+    imageAlt:
+      "Maman allaitant son nouveau-né avec tendresse et sérénité",
     description:
       "Un accompagnement personnalisé pour vous guider dans votre allaitement : mise au sein, positions, difficultés, sevrage en douceur.",
     longDescription:
@@ -103,38 +131,57 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* Services detailed */}
+      {/* Services — photo-first alternating layout */}
       <section className="bg-nealma-bg py-20 px-4 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-6xl space-y-24">
+        <div className="mx-auto max-w-6xl space-y-28">
           {services.map((service, index) => (
             <div
               key={service.slug}
-              className={`flex flex-col gap-10 lg:flex-row lg:items-start ${
+              className={`flex flex-col gap-10 lg:flex-row lg:items-center ${
                 index % 2 !== 0 ? "lg:flex-row-reverse" : ""
               }`}
             >
-              {/* Card */}
-              <div className="w-full lg:w-1/3">
-                <ServiceCard
-                  name={service.name}
-                  description={service.description}
-                  durationMinutes={service.durationMinutes}
-                  priceCents={service.priceCents}
-                  modality={service.modality}
-                  slug={service.slug}
+              {/* Photo */}
+              <div className="relative w-full overflow-hidden rounded-2xl shadow-sm lg:w-2/5 h-72 lg:h-[440px]">
+                <Image
+                  src={service.imageUrl}
+                  alt={service.imageAlt}
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 40vw"
+                  priority={index === 0}
+                  className="object-cover transition-transform duration-700 hover:scale-105"
                 />
               </div>
 
               {/* Details */}
-              <div className="flex-1 space-y-6">
+              <div className="flex-1 space-y-5">
+                <div className="flex flex-wrap items-center gap-3">
+                  <Badge
+                    variant="secondary"
+                    className="bg-nealma-green-100/60 text-nealma-green-400"
+                  >
+                    {modalityLabel(service.modality)}
+                  </Badge>
+                  <span className="inline-flex items-center gap-1.5 text-sm text-nealma-text-light">
+                    <Clock className="size-4 text-nealma-300" aria-hidden="true" />
+                    {formatDuration(service.durationMinutes)}
+                  </span>
+                  <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-nealma-text">
+                    <Euro className="size-4 text-nealma-300" aria-hidden="true" />
+                    {formatPrice(service.priceCents)}
+                  </span>
+                </div>
+
                 <h2 className="text-2xl font-heading text-nealma-text sm:text-3xl">
                   {service.name}
                 </h2>
-                <p className="text-nealma-text-light leading-7">
+
+                <p className="leading-7 text-nealma-text-light">
                   {service.longDescription}
                 </p>
+
                 <div>
-                  <h3 className="mb-3 text-lg font-semibold text-nealma-text">
+                  <h3 className="mb-3 text-base font-semibold text-nealma-text">
                     Les bienfaits
                   </h3>
                   <ul className="space-y-2">
@@ -149,8 +196,11 @@ export default function ServicesPage() {
                     ))}
                   </ul>
                 </div>
-                <Button asChild className="mt-4">
-                  <Link href={`/reservation/${service.slug}`}>Réserver ce soin</Link>
+
+                <Button asChild className="mt-2">
+                  <Link href={`/reservation/${service.slug}`}>
+                    Réserver ce soin
+                  </Link>
                 </Button>
               </div>
             </div>
@@ -177,9 +227,7 @@ export default function ServicesPage() {
               <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-nealma-100" aria-hidden="true">
                 <Home className="size-6 text-nealma-400" />
               </div>
-              <h3 className="text-lg font-semibold text-nealma-text">
-                À domicile
-              </h3>
+              <h3 className="text-lg font-semibold text-nealma-text">À domicile</h3>
               <p className="mt-2 text-sm text-nealma-text-light">
                 Tous les soins sont réalisés chez vous, dans le confort et
                 l&apos;intimité de votre foyer.
@@ -189,9 +237,7 @@ export default function ServicesPage() {
               <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-nealma-green-100" aria-hidden="true">
                 <MapPin className="size-6 text-nealma-green-400" />
               </div>
-              <h3 className="text-lg font-semibold text-nealma-text">
-                Île-de-France
-              </h3>
+              <h3 className="text-lg font-semibold text-nealma-text">Île-de-France</h3>
               <p className="mt-2 text-sm text-nealma-text-light">
                 Je me déplace dans toute la région parisienne : Paris et
                 l&apos;ensemble des départements franciliens.
@@ -201,9 +247,7 @@ export default function ServicesPage() {
               <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-nealma-100" aria-hidden="true">
                 <Heart className="size-6 text-nealma-400" />
               </div>
-              <h3 className="text-lg font-semibold text-nealma-text">
-                Bienveillance
-              </h3>
+              <h3 className="text-lg font-semibold text-nealma-text">Bienveillance</h3>
               <p className="mt-2 text-sm text-nealma-text-light">
                 Chaque soin est adapté à vos besoins, sans jugement, dans le
                 respect de votre rythme.

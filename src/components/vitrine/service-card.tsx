@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Clock, Euro } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -19,6 +20,8 @@ interface ServiceCardProps {
   priceCents: number;
   slug: string;
   modality: string;
+  imageUrl?: string;
+  imageAlt?: string;
 }
 
 function formatPrice(cents: number): string {
@@ -42,11 +45,25 @@ export function ServiceCard({
   priceCents,
   slug,
   modality,
+  imageUrl,
+  imageAlt,
 }: ServiceCardProps) {
   return (
     <Card className="flex h-full flex-col overflow-hidden">
-      {/* Decorative color band */}
-      <div className="h-2 w-full bg-gradient-to-r from-nealma-200 via-nealma-300 to-nealma-400" />
+      {/* Photo or decorative color band */}
+      {imageUrl ? (
+        <div className="relative h-48 w-full shrink-0 overflow-hidden">
+          <Image
+            src={imageUrl}
+            alt={imageAlt || name}
+            fill
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+            className="object-cover transition-transform duration-500 hover:scale-105"
+          />
+        </div>
+      ) : (
+        <div className="h-2 w-full bg-gradient-to-r from-nealma-200 via-nealma-300 to-nealma-400" />
+      )}
 
       <CardHeader>
         <div className="flex items-start justify-between gap-2">
