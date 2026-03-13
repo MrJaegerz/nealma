@@ -14,6 +14,114 @@
 | 2026-03-12 | — | Corrections design review (toutes pages) | `header.tsx`, `footer.tsx`, pages vitrine |
 | 2026-03-12 | — | Redesign wireframe : nouveaux composants + UX | `eyebrow-badge.tsx`, `trust-strip.tsx`, `booking-stepper.tsx`, 10 fichiers |
 | 2026-03-12 | — | Ajout images services (photo-first layout) | `services/page.tsx`, `page.tsx` (accueil) |
+| 2026-03-13 | — | Fix 404 reservation + fallback CalEmbed + Cal.com API v2 header | `[serviceSlug]/page.tsx`, `cal-embed.tsx`, `cal.ts` |
+
+---
+
+## Tier 0 — Systeme de reservation maison (remplacement Cal.com)
+
+> **Decision** : Ne pas utiliser Cal.com (iframe, branding, dependance tierce, donnees chez eux).
+> Construire un systeme de reservation integre a 100% dans Nealma, avec la DB Supabase existante.
+
+### 0.1 Schema DB : table `availability`
+
+| Champ | Valeur |
+|-------|--------|
+| **Statut** | `pending` |
+| **Date livraison** | — |
+| **Description** | Creer une table `availability` pour definir les horaires de travail de la praticienne (jours, heures debut/fin) et une table `blocked_dates` pour les jours bloques (vacances, absences). |
+| **Tech** | Drizzle ORM, migration Supabase |
+| **Schema prevu** | `availability` : `id`, `day_of_week` (0-6), `start_time` (time), `end_time` (time), `is_active` (bool). `blocked_dates` : `id`, `date`, `reason` (optionnel). |
+| **Fichiers concernes** | `db/schema.ts`, nouvelle migration |
+
+### 0.2 API : calcul des creneaux disponibles
+
+| Champ | Valeur |
+|-------|--------|
+| **Statut** | `pending` |
+| **Date livraison** | — |
+| **Description** | Endpoint qui, pour un service donne et une date, retourne les creneaux horaires disponibles. Logique : horaires de la praticienne - bookings existants - jours bloques. Duree du creneau = duree du service + 15 min de battement. |
+| **Tech** | Route API Next.js, requetes Supabase |
+| **Endpoint** | `GET /api/availability?service=massage-prenatal&date=2026-03-20` |
+| **Fichiers concernes** | `api/availability/route.ts`, `lib/availability.ts` |
+
+### 0.3 Composant calendrier (date picker)
+
+| Champ | Valeur |
+|-------|--------|
+| **Statut** | `pending` |
+| **Date livraison** | — |
+| **Description** | Composant calendrier mensuel pour choisir une date. Les jours sans creneaux disponibles sont grises. Jours bloques marques. Navigation mois par mois. |
+| **Tech** | Composant custom ou `react-day-picker` (deja compatible shadcn/ui) |
+| **Fichiers concernes** | `components/booking/date-picker.tsx` |
+
+### 0.4 Composant selection de creneau horaire
+
+| Champ | Valeur |
+|-------|--------|
+| **Statut** | `pending` |
+| **Date livraison** | — |
+| **Description** | Apres choix de la date, affiche la liste des creneaux disponibles (ex: 9h00, 10h15, 11h30...). Le client clique pour selectionner. |
+| **Tech** | Composant React, appel API `/api/availability` |
+| **Fichiers concernes** | `components/booking/time-slots.tsx` |
+
+### 0.5 Formulaire client (etape 3 du stepper)
+
+| Champ | Valeur |
+|-------|--------|
+| **Statut** | `pending` |
+| **Date livraison** | — |
+| **Description** | Formulaire pour recueillir nom, email, telephone et notes optionnelles du client. Validation cote client + serveur. |
+| **Tech** | React Hook Form ou state local, validation |
+| **Fichiers concernes** | `components/booking/client-form.tsx` |
+
+### 0.6 API : creation de booking
+
+| Champ | Valeur |
+|-------|--------|
+| **Statut** | `pending` |
+| **Date livraison** | — |
+| **Description** | Endpoint pour creer une reservation. Verifie que le creneau est toujours dispo (race condition), insere en base, declenche le paiement Stripe, envoie l'email de confirmation via Resend. |
+| **Tech** | Route API Next.js, Supabase, Stripe, Resend |
+| **Endpoint** | `POST /api/bookings` |
+| **Fichiers concernes** | `api/bookings/route.ts` |
+
+### 0.7 Page de confirmation (etape 4)
+
+| Champ | Valeur |
+|-------|--------|
+| **Statut** | `pending` |
+| **Date livraison** | — |
+| **Description** | Recapitulatif du RDV (service, date, heure, prix). Lien de paiement Stripe si applicable. Message de confirmation + email envoye. |
+| **Fichiers concernes** | `reservation/confirmation/page.tsx` |
+
+### 0.8 Flow complet du stepper dynamique
+
+| Champ | Valeur |
+|-------|--------|
+| **Statut** | `pending` |
+| **Date livraison** | — |
+| **Description** | Assembler les etapes 1 a 4 dans un flow fluide : choix soin → date → creneau → formulaire client → confirmation. Le `BookingStepper` reflete l'etape courante. Navigation avant/arriere. |
+| **Fichiers concernes** | `reservation/[serviceSlug]/page.tsx`, `booking-stepper.tsx`, tous les composants booking |
+
+### 0.9 Admin : gestion des disponibilites
+
+| Champ | Valeur |
+|-------|--------|
+| **Statut** | `pending` |
+| **Date livraison** | — |
+| **Description** | Interface dashboard pour que la praticienne puisse : definir ses horaires hebdo, bloquer des jours specifiques, voir/annuler des RDV. |
+| **Fichiers concernes** | `dashboard/rendez-vous/page.tsx`, `dashboard/parametres/page.tsx` |
+
+### 0.10 Emails transactionnels (confirmation + rappel)
+
+| Champ | Valeur |
+|-------|--------|
+| **Statut** | `pending` |
+| **Date livraison** | — |
+| **Description** | Email de confirmation envoye au client apres reservation. Email de rappel 24h avant le RDV (via cron ou Supabase Edge Function). Email a l'admin pour chaque nouveau RDV. |
+| **Tech** | Resend, templates React Email |
+| **Fichiers concernes** | `lib/email.ts`, nouveaux templates |
 
 ---
 
@@ -73,16 +181,7 @@
 
 ## Tier 2 — Nice to have
 
-### 2.1 Stepper de reservation dynamique
-
-| Champ | Valeur |
-|-------|--------|
-| **Statut** | `pending` |
-| **Date livraison** | — |
-| **Description** | Le BookingStepper progresse selon l'etape reelle du parcours (selection soin → choix creneau → coordonnees → confirmation). |
-| **Fichiers concernes** | `booking-stepper.tsx`, pages reservation |
-
-### 2.2 Articles connexes (blog)
+### 2.1 Articles connexes (blog)
 
 | Champ | Valeur |
 |-------|--------|
@@ -91,7 +190,7 @@
 | **Description** | Section "Articles similaires" en bas de chaque article, basee sur la categorie. |
 | **Fichiers concernes** | `blog/[slug]/page.tsx` |
 
-### 2.3 Recherche blog
+### 2.2 Recherche blog
 
 | Champ | Valeur |
 |-------|--------|
@@ -101,17 +200,7 @@
 | **Tech** | Supabase full-text search ou recherche locale |
 | **Fichiers concernes** | `blog/page.tsx` |
 
-### 2.4 Emails de confirmation RDV
-
-| Champ | Valeur |
-|-------|--------|
-| **Statut** | `pending` |
-| **Date livraison** | — |
-| **Description** | Email automatique apres reservation (confirmation + rappel 24h avant). |
-| **Tech** | Resend + webhook Cal.com |
-| **Fichiers concernes** | `api/webhooks/cal/route.ts`, templates email |
-
-### 2.5 Vercel Analytics
+### 2.3 Vercel Analytics
 
 | Champ | Valeur |
 |-------|--------|
@@ -205,3 +294,5 @@
 - L'authentification utilise **Supabase Auth** (pas de credentials en dur). Creer un utilisateur dans la console Supabase pour acceder au dashboard.
 - Les images services utilisent actuellement des URLs Pixabay/Pexels. A remplacer par des photos propres au projet.
 - Le dashboard n'a pas ete touche par le redesign wireframe (prevu pour une phase ulterieure).
+- **Decision 2026-03-13** : Remplacement de Cal.com par un systeme de reservation maison (Tier 0). Raisons : pas de dependance tierce, pas de branding Cal.com, donnees 100% dans Supabase, UX integree au design Nealma, gratuit. Cal.com reste en fallback temporaire avec un message "bientot disponible" tant que le systeme maison n'est pas pret.
+- Le stepper de reservation (ancien Tier 2.1) est absorbe dans le Tier 0 (etape 0.8).

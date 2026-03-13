@@ -6,6 +6,7 @@ async function calFetch(path: string, options?: RequestInit) {
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${process.env.CAL_API_KEY}`,
+      "cal-api-version": "2024-08-13",
       ...options?.headers,
     },
   });
