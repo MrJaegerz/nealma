@@ -53,12 +53,15 @@ export function ArticleCard({
             </p>
           )}
         </CardContent>
-        <CardFooter className="pt-0">
+        <CardFooter className="pt-0 flex items-center justify-between">
           {formattedDate && (
             <Badge variant="secondary" className="text-xs">
               {formattedDate}
             </Badge>
           )}
+          <span className="text-xs text-nealma-400 group-hover:underline">
+            Lire &rarr;
+          </span>
         </CardFooter>
       </Card>
     </Link>

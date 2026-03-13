@@ -15,6 +15,8 @@
 | 2026-03-12 | — | Redesign wireframe : nouveaux composants + UX | `eyebrow-badge.tsx`, `trust-strip.tsx`, `booking-stepper.tsx`, 10 fichiers |
 | 2026-03-12 | — | Ajout images services (photo-first layout) | `services/page.tsx`, `page.tsx` (accueil) |
 | 2026-03-13 | — | Fix 404 reservation + fallback CalEmbed + Cal.com API v2 header | `[serviceSlug]/page.tsx`, `cal-embed.tsx`, `cal.ts` |
+| 2026-03-13 | — | Integration dashboard boilerplate NowTS : sidebar shadcn, breadcrumb, command palette (Cmd+K), charts Recharts, layout components | `_navigation/`, `_charts/`, `layout-components.tsx`, 12 nouveaux fichiers |
+| 2026-03-13 | — | Ajout 5 articles de blog (seed) : massage prenatal, huiles essentielles, postnatal, routine peau, massage a domicile | `scripts/seed-blog.ts` |
 
 ---
 
@@ -122,6 +124,72 @@
 | **Description** | Email de confirmation envoye au client apres reservation. Email de rappel 24h avant le RDV (via cron ou Supabase Edge Function). Email a l'admin pour chaque nouveau RDV. |
 | **Tech** | Resend, templates React Email |
 | **Fichiers concernes** | `lib/email.ts`, nouveaux templates |
+
+---
+
+## Tier 0.5 — Dashboard (integrations boilerplate NowTS)
+
+> **Origine** : composants et patterns identifies dans le boilerplate NowTS qui apporteraient de la valeur au dashboard et au site vitrine.
+
+### 0.5.1 Notifications toast (Sonner)
+
+| Champ | Valeur |
+|-------|--------|
+| **Statut** | `pending` |
+| **Date livraison** | — |
+| **Description** | Remplacer les messages d'etat inline (state local) par des toasts Sonner pour les actions dashboard : changement de mot de passe, suppression d'article, erreurs API Ads. |
+| **Tech** | `sonner`, composant `ui/sonner.tsx` du boilerplate |
+| **Fichiers concernes** | `layout.tsx` (provider), `parametres/page.tsx`, `ads/google/page.tsx`, `ads/tiktok/page.tsx` |
+
+### 0.5.2 Top progress bar (navigation)
+
+| Champ | Valeur |
+|-------|--------|
+| **Statut** | `pending` |
+| **Date livraison** | — |
+| **Description** | Barre de chargement en haut de page lors des transitions de route. Petit effort, gros impact UX. |
+| **Tech** | `nextjs-toploader` ou adaptation de `boilerplate/src/features/page/next-top-loader.tsx` |
+| **Fichiers concernes** | `app/layout.tsx` |
+
+### 0.5.3 Pagination (tables dashboard)
+
+| Champ | Valeur |
+|-------|--------|
+| **Statut** | `pending` |
+| **Date livraison** | — |
+| **Description** | Ajouter la pagination aux tables rendez-vous (actuellement limitee a 50) et articles de blog. Composant `ui/pagination.tsx` du boilerplate. |
+| **Tech** | `shadcn/ui pagination`, `searchParams` Next.js |
+| **Fichiers concernes** | `rendez-vous/page.tsx`, `blog/page.tsx`, nouveau composant `ui/pagination.tsx` |
+
+### 0.5.4 Accordion (FAQ vitrine)
+
+| Champ | Valeur |
+|-------|--------|
+| **Statut** | `pending` |
+| **Date livraison** | — |
+| **Description** | Composant accordion pour creer une section FAQ sur la page d'accueil ou la page services. Pattern du boilerplate `faq-section.tsx`. |
+| **Tech** | `shadcn/ui accordion` |
+| **Fichiers concernes** | Page vitrine, nouveau composant `faq-section.tsx` |
+
+### 0.5.5 Hook `use-warn-if-unsaved-changes`
+
+| Champ | Valeur |
+|-------|--------|
+| **Statut** | `pending` |
+| **Date livraison** | — |
+| **Description** | Avertir l'utilisateur s'il quitte l'editeur de blog avec des modifications non sauvegardees. Hook du boilerplate. |
+| **Tech** | `beforeunload` event, hook custom |
+| **Fichiers concernes** | `blog-editor.tsx`, nouveau hook `use-warn-if-unsaved-changes.ts` |
+
+### 0.5.6 Sections landing enrichies (temoignages, CTA)
+
+| Champ | Valeur |
+|-------|--------|
+| **Statut** | `pending` |
+| **Date livraison** | — |
+| **Description** | Ajouter des sections de temoignages clients et d'appels a l'action sur la page d'accueil, en suivant les patterns du boilerplate (`review-grid.tsx`, `cta-section.tsx`). |
+| **Tech** | Composants custom inspires du boilerplate |
+| **Fichiers concernes** | Page d'accueil, nouveaux composants vitrine |
 
 ---
 

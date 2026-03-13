@@ -9,6 +9,8 @@ import {
   List,
   Save,
 } from "lucide-react";
+import Markdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -53,6 +55,22 @@ const toolbarActions = [
   { icon: LinkIcon, label: "Lien", prefix: "[", suffix: "](url)" },
   { icon: List, label: "Liste", prefix: "- ", suffix: "" },
 ] as const;
+
+function MarkdownPreview({ content }: { content: string }) {
+  if (!content) {
+    return (
+      <span className="text-muted-foreground">
+        L&apos;aper\u00e7u s&apos;affichera ici...
+      </span>
+    );
+  }
+
+  return (
+    <article className="prose prose-sm max-w-none text-nealma-text prose-headings:font-heading prose-headings:text-nealma-text prose-h2:mt-6 prose-h2:mb-2 prose-h2:text-lg prose-h2:font-bold prose-h2:border-b prose-h2:border-nealma-border/30 prose-h2:pb-1 prose-h3:mt-4 prose-h3:mb-1 prose-h3:text-base prose-h3:font-semibold prose-p:mb-2 prose-ul:my-2 prose-ol:my-2 prose-li:text-nealma-text-light prose-strong:text-nealma-text prose-hr:my-4">
+      <Markdown remarkPlugins={[remarkGfm]}>{content}</Markdown>
+    </article>
+  );
+}
 
 export function BlogEditor({ initialContent, onSave }: BlogEditorProps) {
   const [post, setPost] = useState<BlogPost>({
@@ -150,7 +168,7 @@ export function BlogEditor({ initialContent, onSave }: BlogEditorProps) {
         <Label htmlFor="blog-excerpt">Extrait</Label>
         <Textarea
           id="blog-excerpt"
-          placeholder="Un court résumé de l\u2019article..."
+          placeholder="Un court r\u00e9sum\u00e9 de l\u2019article..."
           rows={2}
           value={post.excerpt}
           onChange={(e) => updateField("excerpt", e.target.value)}
@@ -193,14 +211,8 @@ export function BlogEditor({ initialContent, onSave }: BlogEditorProps) {
                 Aper\u00e7u
               </span>
             </div>
-            <div className="min-h-[400px] rounded-md border bg-nealma-bg-warm/30 p-4">
-              <article className="prose prose-sm max-w-none whitespace-pre-wrap text-nealma-text">
-                {post.content || (
-                  <span className="text-muted-foreground">
-                    L&apos;aper\u00e7u s&apos;affichera ici...
-                  </span>
-                )}
-              </article>
+            <div className="min-h-[400px] max-h-[600px] overflow-y-auto rounded-md border bg-nealma-bg-warm/30 p-4">
+              <MarkdownPreview content={post.content} />
             </div>
           </div>
         </div>
@@ -238,14 +250,8 @@ export function BlogEditor({ initialContent, onSave }: BlogEditorProps) {
               />
             </TabsContent>
             <TabsContent value="preview">
-              <div className="min-h-[300px] rounded-md border bg-nealma-bg-warm/30 p-4">
-                <article className="prose prose-sm max-w-none whitespace-pre-wrap text-nealma-text">
-                  {post.content || (
-                    <span className="text-muted-foreground">
-                      L&apos;aper\u00e7u s&apos;affichera ici...
-                    </span>
-                  )}
-                </article>
+              <div className="min-h-[300px] max-h-[500px] overflow-y-auto rounded-md border bg-nealma-bg-warm/30 p-4">
+                <MarkdownPreview content={post.content} />
               </div>
             </TabsContent>
           </Tabs>
@@ -255,7 +261,7 @@ export function BlogEditor({ initialContent, onSave }: BlogEditorProps) {
       {/* SEO fields */}
       <div className="space-y-4 rounded-lg border bg-muted/20 p-4">
         <h3 className="text-sm font-medium text-nealma-text">
-          Référencement (SEO)
+          R\u00e9f\u00e9rencement (SEO)
         </h3>
         <div className="grid gap-4 sm:grid-cols-2">
           <div className="space-y-2">
@@ -267,20 +273,20 @@ export function BlogEditor({ initialContent, onSave }: BlogEditorProps) {
               onChange={(e) => updateField("seoTitle", e.target.value)}
             />
             <p className="text-xs text-muted-foreground">
-              {post.seoTitle.length}/60 caractères
+              {post.seoTitle.length}/60 caract\u00e8res
             </p>
           </div>
           <div className="space-y-2">
             <Label htmlFor="seo-description">Description SEO</Label>
             <Textarea
               id="seo-description"
-              placeholder="Description pour les résultats de recherche..."
+              placeholder="Description pour les r\u00e9sultats de recherche..."
               rows={2}
               value={post.seoDescription}
               onChange={(e) => updateField("seoDescription", e.target.value)}
             />
             <p className="text-xs text-muted-foreground">
-              {post.seoDescription.length}/160 caractères
+              {post.seoDescription.length}/160 caract\u00e8res
             </p>
           </div>
         </div>
@@ -301,7 +307,7 @@ export function BlogEditor({ initialContent, onSave }: BlogEditorProps) {
             </SelectTrigger>
             <SelectContent>
               <SelectItem value="draft">Brouillon</SelectItem>
-              <SelectItem value="published">Publié</SelectItem>
+              <SelectItem value="published">Publi\u00e9</SelectItem>
             </SelectContent>
           </Select>
         </div>

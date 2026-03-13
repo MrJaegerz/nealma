@@ -5,6 +5,12 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { AdsChart } from "@/components/dashboard/ads-chart";
+import {
+  Layout,
+  LayoutContent,
+  LayoutHeader,
+  LayoutTitle,
+} from "@/components/dashboard/layout-components";
 
 interface Campaign {
   label: string;
@@ -27,7 +33,7 @@ export default function GoogleAdsPage() {
 
     try {
       const res = await fetch(
-        `/api/ads/google?customerId=${encodeURIComponent(customerId)}`
+        `/api/ads/google?customerId=${encodeURIComponent(customerId)}`,
       );
       const data = await res.json();
 
@@ -53,53 +59,52 @@ export default function GoogleAdsPage() {
             clicks: parseInt(r.metrics.clicks) || 0,
             cost: (parseInt(r.metrics.costMicros) || 0) / 1_000_000,
             conversions: parseFloat(r.metrics.conversions) || 0,
-          })
-        )
+          }),
+        ),
       );
     } catch {
-      setError("Impossible de se connecter à Google Ads");
+      setError("Impossible de se connecter \u00e0 Google Ads");
     } finally {
       setLoading(false);
     }
   }
 
   return (
-    <div>
-      <h1 className="text-2xl font-heading font-bold text-nealma-text mb-8">
-        Google Ads
-      </h1>
-
-      <div className="flex gap-4 items-end mb-8">
-        <div className="flex-1 max-w-xs">
-          <Label htmlFor="customerId">Customer ID</Label>
-          <Input
-            id="customerId"
-            placeholder="123-456-7890"
-            value={customerId}
-            onChange={(e) => setCustomerId(e.target.value)}
-          />
+    <Layout size="lg">
+      <LayoutHeader>
+        <LayoutTitle>Google Ads</LayoutTitle>
+      </LayoutHeader>
+      <LayoutContent>
+        <div className="flex gap-4 items-end mb-8">
+          <div className="flex-1 max-w-xs">
+            <Label htmlFor="customerId">Customer ID</Label>
+            <Input
+              id="customerId"
+              placeholder="123-456-7890"
+              value={customerId}
+              onChange={(e) => setCustomerId(e.target.value)}
+            />
+          </div>
+          <Button
+            onClick={loadCampaigns}
+            disabled={loading || !customerId}
+          >
+            {loading ? "Chargement..." : "Charger les campagnes"}
+          </Button>
         </div>
-        <Button
-          onClick={loadCampaigns}
-          disabled={loading || !customerId}
-        >
-          {loading ? "Chargement..." : "Charger les campagnes"}
-        </Button>
-      </div>
 
-      {error && (
-        <p className="text-destructive mb-4">{error}</p>
-      )}
+        {error && <p className="text-destructive mb-4">{error}</p>}
 
-      {campaigns.length > 0 && (
-        <AdsChart data={campaigns} platform="google" />
-      )}
+        {campaigns.length > 0 && (
+          <AdsChart data={campaigns} platform="google" />
+        )}
 
-      {!loading && campaigns.length === 0 && !error && (
-        <p className="text-muted-foreground text-center py-16">
-          Entrez votre Customer ID pour charger vos campagnes Google Ads.
-        </p>
-      )}
-    </div>
+        {!loading && campaigns.length === 0 && !error && (
+          <p className="text-muted-foreground text-center py-16">
+            Entrez votre Customer ID pour charger vos campagnes Google Ads.
+          </p>
+        )}
+      </LayoutContent>
+    </Layout>
   );
 }

@@ -22,7 +22,7 @@ export async function POST(req: NextRequest) {
   const result = streamText({
     model,
     system: BLOG_SYSTEM_PROMPT,
-    prompt: `Écris un article de blog complet en format MDX sur le sujet suivant :\n\n${prompt}`,
+    prompt: `Écris un article de blog complet en Markdown sur le sujet suivant :\n\n${prompt}`,
   });
 
   return result.toTextStreamResponse();

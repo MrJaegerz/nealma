@@ -5,6 +5,12 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { AdsChart } from "@/components/dashboard/ads-chart";
+import {
+  Layout,
+  LayoutContent,
+  LayoutHeader,
+  LayoutTitle,
+} from "@/components/dashboard/layout-components";
 
 interface Campaign {
   label: string;
@@ -27,7 +33,7 @@ export default function TikTokAdsPage() {
 
     try {
       const res = await fetch(
-        `/api/ads/tiktok?advertiserId=${encodeURIComponent(advertiserId)}`
+        `/api/ads/tiktok?advertiserId=${encodeURIComponent(advertiserId)}`,
       );
       const data = await res.json();
 
@@ -53,53 +59,52 @@ export default function TikTokAdsPage() {
             clicks: parseInt(c.metrics?.clicks) || 0,
             cost: parseFloat(c.metrics?.spend) || 0,
             conversions: parseFloat(c.metrics?.conversions) || 0,
-          })
-        )
+          }),
+        ),
       );
     } catch {
-      setError("Impossible de se connecter à TikTok Ads");
+      setError("Impossible de se connecter \u00e0 TikTok Ads");
     } finally {
       setLoading(false);
     }
   }
 
   return (
-    <div>
-      <h1 className="text-2xl font-heading font-bold text-nealma-text mb-8">
-        TikTok Ads
-      </h1>
-
-      <div className="flex gap-4 items-end mb-8">
-        <div className="flex-1 max-w-xs">
-          <Label htmlFor="advertiserId">Advertiser ID</Label>
-          <Input
-            id="advertiserId"
-            placeholder="Votre ID annonceur TikTok"
-            value={advertiserId}
-            onChange={(e) => setAdvertiserId(e.target.value)}
-          />
+    <Layout size="lg">
+      <LayoutHeader>
+        <LayoutTitle>TikTok Ads</LayoutTitle>
+      </LayoutHeader>
+      <LayoutContent>
+        <div className="flex gap-4 items-end mb-8">
+          <div className="flex-1 max-w-xs">
+            <Label htmlFor="advertiserId">Advertiser ID</Label>
+            <Input
+              id="advertiserId"
+              placeholder="Votre ID annonceur TikTok"
+              value={advertiserId}
+              onChange={(e) => setAdvertiserId(e.target.value)}
+            />
+          </div>
+          <Button
+            onClick={loadCampaigns}
+            disabled={loading || !advertiserId}
+          >
+            {loading ? "Chargement..." : "Charger les campagnes"}
+          </Button>
         </div>
-        <Button
-          onClick={loadCampaigns}
-          disabled={loading || !advertiserId}
-        >
-          {loading ? "Chargement..." : "Charger les campagnes"}
-        </Button>
-      </div>
 
-      {error && (
-        <p className="text-destructive mb-4">{error}</p>
-      )}
+        {error && <p className="text-destructive mb-4">{error}</p>}
 
-      {campaigns.length > 0 && (
-        <AdsChart data={campaigns} platform="tiktok" />
-      )}
+        {campaigns.length > 0 && (
+          <AdsChart data={campaigns} platform="tiktok" />
+        )}
 
-      {!loading && campaigns.length === 0 && !error && (
-        <p className="text-muted-foreground text-center py-16">
-          Entrez votre Advertiser ID pour charger vos campagnes TikTok Ads.
-        </p>
-      )}
-    </div>
+        {!loading && campaigns.length === 0 && !error && (
+          <p className="text-muted-foreground text-center py-16">
+            Entrez votre Advertiser ID pour charger vos campagnes TikTok Ads.
+          </p>
+        )}
+      </LayoutContent>
+    </Layout>
   );
 }
