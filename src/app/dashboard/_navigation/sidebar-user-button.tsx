@@ -73,7 +73,7 @@ export function SidebarUserButton() {
               </a>
             </DropdownMenuItem>
             <DropdownMenuItem
-              onClick={() => router.push("/dashboard/parametres")}
+              onClick={() => router.push("/dashboard/settings")}
             >
               <Settings className="mr-2 size-4" />
               Param&egrave;tres

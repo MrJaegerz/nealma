@@ -16,10 +16,8 @@ const segmentLabels: Record<string, string> = {
   dashboard: "Dashboard",
   "rendez-vous": "Rendez-vous",
   blog: "Blog",
-  ads: "Publicit\u00e9s",
-  google: "Google Ads",
-  tiktok: "TikTok Ads",
-  parametres: "Param\u00e8tres",
+  linkedin: "LinkedIn",
+  settings: "Paramètres",
   nouveau: "Nouvel article",
 };
 

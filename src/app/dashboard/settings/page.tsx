@@ -4,7 +4,6 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Separator } from "@/components/ui/separator";
 import {
   Card,
   CardContent,
@@ -20,7 +19,7 @@ import {
   LayoutTitle,
 } from "@/components/dashboard/layout-components";
 
-export default function ParametresPage() {
+export default function SettingsPage() {
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [passwordMessage, setPasswordMessage] = useState("");
@@ -40,12 +39,12 @@ export default function ParametresPage() {
       if (error) {
         setPasswordMessage(error.message);
       } else {
-        setPasswordMessage("Mot de passe mis \u00e0 jour avec succ\u00e8s.");
+        setPasswordMessage("Mot de passe mis à jour avec succès.");
         setCurrentPassword("");
         setNewPassword("");
       }
     } catch {
-      setPasswordMessage("Erreur lors de la mise \u00e0 jour.");
+      setPasswordMessage("Erreur lors de la mise à jour.");
     } finally {
       setSaving(false);
     }
@@ -54,15 +53,15 @@ export default function ParametresPage() {
   return (
     <Layout size="lg">
       <LayoutHeader>
-        <LayoutTitle>Param&egrave;tres</LayoutTitle>
+        <LayoutTitle>Paramètres</LayoutTitle>
       </LayoutHeader>
       <LayoutContent>
-        <div className="space-y-8 max-w-2xl">
+        <div className="max-w-2xl space-y-8">
           <Card>
             <CardHeader>
               <CardTitle className="font-heading">Profil</CardTitle>
               <CardDescription>
-                G&eacute;rez vos informations de connexion
+                Gérez vos informations de connexion
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -91,39 +90,9 @@ export default function ParametresPage() {
                   </p>
                 )}
                 <Button type="submit" disabled={saving || !newPassword}>
-                  {saving ? "Mise \u00e0 jour..." : "Changer le mot de passe"}
+                  {saving ? "Mise à jour..." : "Changer le mot de passe"}
                 </Button>
               </form>
-            </CardContent>
-          </Card>
-
-          <Separator />
-
-          <Card>
-            <CardHeader>
-              <CardTitle className="font-heading">Configuration</CardTitle>
-              <CardDescription>
-                Les cl&eacute;s API et configurations externes sont g&eacute;r&eacute;es via les
-                variables d&apos;environnement sur Vercel.
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-3 text-sm text-muted-foreground">
-                <p>
-                  <strong>Stripe :</strong> Configur&eacute; via STRIPE_SECRET_KEY
-                </p>
-                <p>
-                  <strong>Cal.com :</strong> Configur&eacute; via CAL_API_KEY
-                </p>
-                <p>
-                  <strong>IA (Claude, OpenAI, Gemini) :</strong> Configur&eacute; via
-                  les cl&eacute;s API respectives
-                </p>
-                <p>
-                  <strong>Email (Resend) :</strong> Configur&eacute; via
-                  RESEND_API_KEY
-                </p>
-              </div>
             </CardContent>
           </Card>
         </div>
